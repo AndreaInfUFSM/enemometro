@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  CO_ESCOLA: 1
+  CO_MUNICIPIO_ESC: 1
+  NO_MUNICIPIO_ESC: MyString
+  SG_UF_ESC: MyString
+  MED: 1.5
+  NO_ESCOLA: MyString
+
+two:
+  CO_ESCOLA: 1
+  CO_MUNICIPIO_ESC: 1
+  NO_MUNICIPIO_ESC: MyString
+  SG_UF_ESC: MyString
+  MED: 1.5
+  NO_ESCOLA: MyString

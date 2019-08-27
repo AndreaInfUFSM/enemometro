@@ -10,6 +10,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 2019_08_27_162048) do
+
+  create_table "med2016_cidades", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.integer "CO_MUNICIPIO_ESC"
+    t.string "NO_MUNICIPIO_ESC"
+    t.string "SG_UF_ESC"
+    t.float "MED"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "med2016_escolas", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.integer "CO_ESCOLA"
+    t.integer "CO_MUNICIPIO_ESC"
+    t.string "NO_MUNICIPIO_ESC"
+    t.string "SG_UF_ESC"
+    t.float "MED"
+    t.string "NO_ESCOLA"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
 end
