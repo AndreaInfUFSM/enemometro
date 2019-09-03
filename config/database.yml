@@ -48,7 +48,11 @@ test:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
 production:
-  <<: *default
+  adapter: mysql2
+  pool: 5
+  timeout: 5000
   database: Enemometro_production
-  username: Enemometro
-  password: <%= ENV['ENEMOMETRO_DATABASE_PASSWORD'] %>
+  username: root
+  password: pratesvacilao
+  socket: "/cloudsql/enemometro-251121:southamerica-east1:enemometrodb"
+
