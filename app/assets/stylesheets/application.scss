@@ -10,6 +10,16 @@
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
  *
- *= require_tree .
- *= require_self
  */
+
+ @import 'animate.css';
+ @import 'style.css';
+ @import 'bootstrap.scss';
+ @import 'flexslider.css';
+ @import 'icomoon.css';
+ @import 'magnific-popup.css';
+ @import 'owl.carousel.min.css';
+ @import 'owl.theme.default.min.css';
+ @import 'pricing.css';
+ @import 'principal.css';
+ @import 'style.scss';
