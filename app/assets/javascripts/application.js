@@ -14,6 +14,8 @@
 //= require principal
 //= require google_map
 //= require jquery.min
+//= require jquery-ui.min
+//= require funcs
 //= require jquery.easing.1.3
 //= require bootstrap.min
 //= require jquery.waypoints.min

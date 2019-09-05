@@ -12,13 +12,15 @@
 
 	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Roboto+Slab:300,400" rel="stylesheet">
-
 	<!-- FOR IE9 below -->
 	<!--[if lt IE 9]>
 	<script src="js/respond.min.js"></script>
 	<![endif]-->
+	<script type="text/javascript">
+		window.onpaint = carregaBanco();
+	</script>
 	</head>
-	<body>
+	<body onload="initialize()">
 
 	<div class="fh5co-loader"></div>
 
@@ -29,6 +31,7 @@
 				<div class="row">
 					<div class="col-xs-2">
 						<div id="fh5co-logo"><a href="#"><i class="icon-study" style="width: 40%;"></i>Enemômetro<span></span></a></div>
+						<a id="cidadeNome"></a>
 					</div>
 					<div class="col-xs-10 text-right menu-1">
 						<ul>
@@ -55,29 +58,15 @@
 				   				<div class="slider-text-inner">
 				   					<h1>ENEMÔMETRO</h1>
 				   					<h2>Comparando médias do ENEM</h2>
-										<p><a class="btn btn-primary btn-lg btn-learn" href="#campo_cidade" onclick="criaPesquisa(document.getElementById('busca'))">Comece Agora</a></p>
+									<input class="form-control" style="color:white;" id = "caixaCidade" type="text" placeholder="Qual a sua cidade?">
+									<br>
+									<button type="button" style="visibility: hidden;" id = "botaozinho" class="btn btn-info">Buscar</button>
 				   				</div>
 				   			</div>
 				   		</div>
 			   		</div>
 			   	</li>
-			   	<li style="background-image: url(/assets/img_bg_3.jpg);">
-			   		<div class="overlay-gradient"></div>
-			   		<div class="container">
-			   			<div class="row">
-				   			<div class="col-md-8 col-md-offset-2 text-center slider-text">
-				   				<div class="slider-text-inner">
-				   					<h1>Marcelo Prates & Willian Soares</h1>
-									<p><a class="btn btn-primary btn-lg btn-learn" href="#fh5co-testimonial">Saiba Mais</a></p>
-				   				</div>
-				   			</div>
-				   		</div>
-			   		</div>
-			   	</li>
-		  	</ul>
-	  	</div>
 	</aside>
-	<span id="busca"></span>
 <!--
 	<div id="fh5co-course-categories">
 		<div class="container">
@@ -184,10 +173,13 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-md-10 col-md-offset-1">
+				<div class="row">
+					<h2 style="color:white;"></h2>
+				</div>
 					<div class="row">
 						<div class="col-md-3 col-sm-6 text-center animate-box">
 							<span class="icon"><i class="icon-world"></i></span>
-							<span class="fh5co-counter js-counter" data-from="0" data-to="3297" data-speed="5000" data-refresh-interval="50"></span>
+							<span class="fh5co-counter js-counter" id="contador" data-from="0" data-to="3297" data-speed="5000" data-refresh-interval="50"></span>
 							<span class="fh5co-counter-label">LOREM IPSUM</span>
 						</div>
 						<div class="col-md-3 col-sm-6 text-center animate-box">
@@ -292,7 +284,7 @@
 							<div class="item">
 								<div class="testimony-slide active text-center">
 									<div class="user" style="background-image: url(/assets/person1.jpg);"></div>
-									<span>Willian<br><small>Estudante</small></span>
+									<span>Willian Soares<br><small>Estudante</small></span>
 									<blockquote>
 										<p>&ldquo;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum non rhoncus arcu. Vestibulum interdum purus diam, ac pharetra turpis gravida a. Pellentesque bibendum orci lacinia ex volutpat tempus eu non arcu. Mauris placerat id erat interdum cursus. Praesent sit amet nisl rhoncus nunc feugiat hendrerit. Proin id nibh mollis, iaculis purus at, molestie nisl. Nulla egestas lectus nec nunc ornar.&rdquo;</p>
 									</blockquote>
@@ -489,16 +481,15 @@
 		</div>
 	</div>
 
-	<div id="fh5co-register" style="background-image: url(images/img_bg_2.jpg);">
+	<div id="fh5co-register" style="background-image: url(/assets/img_bg_2.jpg);">
 		<div class="overlay"></div>
 		<div class="row">
 			<div class="col-md-8 col-md-offset-2 animate-box">
 				<div class="date-counter text-center">
-					<h2>Get 400 of Online Courses for Free</h2>
-					<h3>By Mike Smith</h3>
+					<h2>ENEM 2019</h2>
+					<h3>Contagem regressiva para o início das provas</h3>
 					<div class="simply-countdown simply-countdown-one"></div>
-					<p><strong>Limited Offer, Hurry Up!</strong></p>
-					<p><a href="#" class="btn btn-primary btn-lg btn-reg">Register Now!</a></p>
+					<p><strong>Não perca tempo, inscreva-se já!</strong></p>
 				</div>
 			</div>
 		</div>
@@ -597,9 +588,12 @@
 
     // default example
     simplyCountdown('.simply-countdown-one', {
-        year: d.getFullYear(),
-        month: d.getMonth() + 1,
-        day: d.getDate()
+        // year: d.getFullYear(),
+        // month: d.getMonth() + 1,
+		// day: d.getDate()
+		year: 2020,
+		month: 11,
+		day: 3
     });
 
     //jQuery example
