@@ -16,9 +16,6 @@
 	<!--[if lt IE 9]>
 	<script src="js/respond.min.js"></script>
 	<![endif]-->
-	<script type="text/javascript">
-		window.onpaint = carregaBanco();
-	</script>
 	</head>
 	<body onload="initialize()">
 
@@ -30,7 +27,7 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-xs-2">
-						<div id="fh5co-logo"><a href="#"><i class="icon-study" style="width: 40%;"></i>Enemômetro<span></span></a></div>
+						<div id="fh5co-logo"><a href="/"><i class="icon-study" style="width: 40%;"></i>Enemômetro<span></span></a></div>
 						<a id="cidadeNome"></a>
 					</div>
 					<div class="col-xs-10 text-right menu-1">
@@ -58,7 +55,37 @@
 				   				<div class="slider-text-inner">
 				   					<h1>ENEMÔMETRO</h1>
 				   					<h2>Comparando médias do ENEM</h2>
-									<input class="form-control" style="color:white;" id = "caixaCidade" type="text" placeholder="Qual a sua cidade?">
+									<label style="color:white;" id = "labelEstado">Selecione seu estado</label>
+									<select class="form-control" id="selectEstado" style="color:black; background-color: rgba(255,255,255,0.8);">
+										<option>AC</option>
+										<option>AL</option>
+										<option>AM</option>
+										<option>AP</option>
+										<option>BA</option>
+										<option>CE</option>
+										<option>DF</option>
+										<option>ES</option>
+										<option>GO</option>
+										<option>MA</option>
+										<option>MG</option>
+										<option>MS</option>
+										<option>MT</option>
+										<option>PA</option>
+										<option>PB</option>
+										<option>PE</option>
+										<option>PI</option>
+										<option>PR</option>
+										<option>RJ</option>
+										<option>RN</option>
+										<option>RO</option>
+										<option>RR</option>
+										<option>RS</option>
+										<option>SC</option>
+										<option>SP</option>
+										<option>SE</option>
+										<option>TO</option>
+									</select><br>
+									<input class="form-control" style="color:black; visibility: hidden; background-color: rgba(255,255,255,0.8);" id = "caixaCidade" type="text" placeholder="Qual a sua cidade?">
 									<br>
 									<button type="button" style="visibility: hidden;" id = "botaozinho" class="btn btn-info">Buscar</button>
 				   				</div>
@@ -177,25 +204,20 @@
 					<h2 style="color:white;"></h2>
 				</div>
 					<div class="row">
-						<div class="col-md-3 col-sm-6 text-center animate-box">
+						<div class="col-md-4 col-sm-6 text-center animate-box">
 							<span class="icon"><i class="icon-world"></i></span>
-							<span class="fh5co-counter js-counter" id="contador" data-from="0" data-to="3297" data-speed="5000" data-refresh-interval="50"></span>
-							<span class="fh5co-counter-label">LOREM IPSUM</span>
+							<span class="fh5co-counter js-counter" id="rnkNacional" data-from="0" data-to="0" data-speed="5000" data-refresh-interval="50"></span>
+							<span class="fh5co-counter-label">Ranking Nacional</span>
 						</div>
-						<div class="col-md-3 col-sm-6 text-center animate-box">
+						<div class="col-md-4 col-sm-6 text-center animate-box">
 							<span class="icon"><i class="icon-study"></i></span>
-							<span class="fh5co-counter js-counter" data-from="0" data-to="3700" data-speed="5000" data-refresh-interval="50"></span>
-							<span class="fh5co-counter-label">LOREM IPSUM</span>
+							<span class="fh5co-counter js-counter" id="cntMedia" data-from="0" data-to="0" data-decimals="2" data-speed="5000" data-refresh-interval="50"></span>
+							<span class="fh5co-counter-label">Média</span>
 						</div>
-						<div class="col-md-3 col-sm-6 text-center animate-box">
-							<span class="icon"><i class="icon-bulb"></i></span>
-							<span class="fh5co-counter js-counter" data-from="0" data-to="5034" data-speed="5000" data-refresh-interval="50"></span>
-							<span class="fh5co-counter-label">LOREM IPSUM</span>
-						</div>
-						<div class="col-md-3 col-sm-6 text-center animate-box">
+						<div class="col-md-4 col-sm-6 text-center animate-box">
 							<span class="icon"><i class="icon-head"></i></span>
-							<span class="fh5co-counter js-counter" data-from="0" data-to="1080" data-speed="5000" data-refresh-interval="50"></span>
-							<span class="fh5co-counter-label">LOREM IPSUM</span>
+							<span class="fh5co-counter js-counter" data-from="0" data-to="0" data-speed="5000" data-refresh-interval="50"></span>
+							<span class="fh5co-counter-label">Nº Alunos</span>
 						</div>
 					</div>
 				</div>

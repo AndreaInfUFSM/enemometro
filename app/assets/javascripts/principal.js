@@ -75,7 +75,7 @@ geocoder = new google.maps.Geocoder();
 if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(successFunction2, errorFunction);
 } 
-console.log("Geocoder iniciado");
+
 successFunction2(geocoder);
 }
 
@@ -94,12 +94,11 @@ geocoder.geocode({'latLng': latlng}, function(results, status) {
             if (results[0].address_components[i].types[b] == "administrative_area_level_2") {
                 //this is the object you are looking for
                 city= results[0].address_components[i];
+                cityName = city.long_name;
                 break;
             }
         }
-    }
-    //city data
-    cityName = city.short_name;
+    }    
     } else {
         alert("No results found");
     }
