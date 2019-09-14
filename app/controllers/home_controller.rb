@@ -7,8 +7,13 @@ class HomeController < ApplicationController
         end    
     end
     def showCity
-        @cidade = Med2016Cidade.where('NO_MUNICIPIO_ESC LIKE ? AND SG_UF_ESC = ?', params[:nocidade], params[:SG_UF_ESC]).take
-        render json: @cidade
+        if params[:ano] == '2016'
+            @cidade = Med2016Cidade.where('NO_MUNICIPIO_ESC LIKE ? AND SG_UF_ESC = ?', params[:nocidade], params[:SG_UF_ESC]).take
+            render json: @cidade
+        elsif params[:ano] == '2017'
+            @cidade = Med2017Cidade.where('NO_MUNICIPIO_ESC LIKE ? AND SG_UF_ESC = ?', params[:nocidade], params[:SG_UF_ESC]).take
+            render json: @cidade
+        end
     end
 
 end

@@ -4,7 +4,7 @@ $(document).ready(function(){
     $("#selectEstado").change(function(){
       carregaBanco(document.getElementById("selectEstado").value);
       document.getElementById("caixaCidade").style.visibility = "visible";
-      document.getElementById("btnVoltar").style.visibility = "visible";
+      document.getElementById("selectAno").style.visibility = "visible";
     });
     $(function(){
         $('#caixaCidade').autocomplete({
@@ -48,13 +48,16 @@ function carregaBanco(val)
 var callExecuter=function(){
     $.ajax({
       type:'POST',
-      url:'/' +'?nocidade='+ document.getElementById("caixaCidade").value +'&SG_UF_ESC=' + document.getElementById("selectEstado").value,
+      url:'/' +'?nocidade='+ document.getElementById("caixaCidade").value +
+               '&SG_UF_ESC=' + document.getElementById("selectEstado").value +
+               '&ano=' + document.getElementById("selectAno").value,
       success:function(cidade){
         if(cidade != undefined)
         {
           console.log("Cidade: "+ cidade.NO_MUNICIPIO_ESC);
           console.log("Média: " + cidade.MED);
           $("#cntMedia").countTo({from: 0, to: cidade.MED});
+          $("#rnkNacional").countTo({from: 0, to: cidade.rank});
           var elemento = document.getElementById("fh5co-counter");
           elemento.scrollIntoView({
             behavior: 'smooth'

@@ -85,8 +85,12 @@
 										<option>SE</option>
 										<option>TO</option>
 									</select><br>
+									<select class="form-control" id="selectAno" style="visibility: hidden; color:black; background-color: rgba(255,255,255,0.8);">
+										<option>2016</option>
+										<option>2017</option>
+										<option disabled>2018</option>
+									</select><br>
 									<input class="form-control" style="color:black; visibility: hidden; background-color: rgba(255,255,255,0.8);" id = "caixaCidade" type="text" placeholder="Qual a sua cidade?">
-									<br>
 									<button type="button" style="visibility: hidden;" id = "botaozinho" class="btn btn-info">Buscar</button>
 				   				</div>
 				   			</div>
@@ -204,20 +208,15 @@
 					<h2 style="color:white;"></h2>
 				</div>
 					<div class="row">
-						<div class="col-md-4 col-sm-6 text-center animate-box">
+						<div class="col-md-6 col-sm-6 text-center animate-box">
 							<span class="icon"><i class="icon-world"></i></span>
-							<span class="fh5co-counter js-counter" id="rnkNacional" data-from="0" data-to="0" data-speed="5000" data-refresh-interval="50"></span>
+							<span class="fh5co-counter js-counter" id="rnkNacional" data-from="0" data-to="0" data-speed="1000" data-refresh-interval="50"></span>
 							<span class="fh5co-counter-label">Ranking Nacional</span>
 						</div>
-						<div class="col-md-4 col-sm-6 text-center animate-box">
+						<div class="col-md-6 col-sm-6 text-center animate-box">
 							<span class="icon"><i class="icon-study"></i></span>
-							<span class="fh5co-counter js-counter" id="cntMedia" data-from="0" data-to="0" data-decimals="2" data-speed="5000" data-refresh-interval="50"></span>
+							<span class="fh5co-counter js-counter" id="cntMedia" data-from="0" data-to="0" data-decimals="2" data-speed="1000" data-refresh-interval="50"></span>
 							<span class="fh5co-counter-label">Média</span>
-						</div>
-						<div class="col-md-4 col-sm-6 text-center animate-box">
-							<span class="icon"><i class="icon-head"></i></span>
-							<span class="fh5co-counter js-counter" data-from="0" data-to="0" data-speed="5000" data-refresh-interval="50"></span>
-							<span class="fh5co-counter-label">Nº Alunos</span>
 						</div>
 					</div>
 				</div>
