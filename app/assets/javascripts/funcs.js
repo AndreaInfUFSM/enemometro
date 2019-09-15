@@ -52,12 +52,43 @@ var callExecuter=function(){
                '&SG_UF_ESC=' + document.getElementById("selectEstado").value +
                '&ano=' + document.getElementById("selectAno").value,
       success:function(cidade){
+        var initialC = 0;
+        var initialR = 0;
+        var limitC  = 0;
+        var limitR = 0;
+
         if(cidade != undefined)
         {
           console.log("Cidade: "+ cidade.NO_MUNICIPIO_ESC);
           console.log("Média: " + cidade.MED);
-          $("#cntMedia").countTo({from: 0, to: cidade.MED});
-          $("#rnkNacional").countTo({from: 0, to: cidade.rank});
+          console.log("Média: " + cidade.rank);
+          if(limitR == 0 && limitR == 0){
+            limitC = cidade.MED;
+            limitR = cidade.rank;
+            $("#cntMedia").countTo({from: initialC, to: limitC});
+            $("#rnkNacional").countTo({from: initialR, to: limitR});
+          }
+          else if(limitC > 0 && limitR > 0){
+            if(cidade.MED > limitC){
+              initialC =  cidade.MED - limitC;
+              limitC - cidade.MED;
+            }
+            else if(cidade.MED < limitC){
+              initialC = limitC - cidade.MED;
+              limitC - cidade.MED;
+            }
+            if(cidade.rank > limitR){
+              initialR = cidade.rank - limitR;
+              limitR = cidade.rank;
+
+            }
+            else if (cidade.rank < limitR){
+              initialR = limitR - cidade.rank;
+              limitR = cidade.rank;
+            }
+          }
+          $("#cntMedia").countTo({from: initialC, to: limitC});
+          $("#rnkNacional").countTo({from: initialR, to: limitR});
           var elemento = document.getElementById("fh5co-counter");
           elemento.scrollIntoView({
             behavior: 'smooth'
