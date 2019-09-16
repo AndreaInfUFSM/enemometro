@@ -1,5 +1,6 @@
 class HomeController < ApplicationController
     protect_from_forgery with: :null_session
+    
     def index
         if params[:inic]
             @listacidades = Med2016Cidade.where('SG_UF_ESC = ?',params[:SG_UF_ESC]).order(:NO_MUNICIPIO_ESC).pluck(:NO_MUNICIPIO_ESC)

@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title>Enemômetro</title>
-	<link rel="shortcut icon" href="/assets/favicon.ico">
+	<link rel="shortcut icon" href="./assets/images/favicon.ico">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="description" content="Free HTML5 Website Template by freehtml5.co" />
 	<meta name="keywords" content="free website templates, free html5, free template, free bootstrap, free website template, html5, css3, mobile first, responsive" />
@@ -12,19 +12,21 @@
 
 	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Roboto+Slab:300,400" rel="stylesheet">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 	<!-- FOR IE9 below -->
 	<!--[if lt IE 9]>
-	<script src="js/respond.min.js"></script>
+	<script src="./javascripts/respond.min.js"></script>
 	<![endif]-->
 	<script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA5nT-iZ7Mn1so-8OAR13SPV81FGFVuQ3E&callback=initialize">
 	</script>
-
+	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 	</head>
 	<body onload="initialize()">
 
 	<div class="fh5co-loader"></div>
-
+	<div id="chart_div">
+	</div>
 	<div id="page">
 	<nav class="fh5co-nav" role="navigation">
 		<div class="top-menu">
@@ -37,8 +39,8 @@
 					<div class="col-xs-10 text-right menu-1">
 						<ul>
 							<li class="active"><a href="#">Inicio</a></li>
-							<li><a onclick="criaPesquisa(document.getElementById('busca')); Geo_location()" href="#campo_cidade">Compare</a></li>
-							<li><a href="#">Dados Educionais</a></li>
+							<li><a href="#selectEstado">Compare</a></li>
+							<li><a href="#fh5co-counter">Dados Educionais</a></li>
 						  <li><a href="#fh5co-testimonial">Sobre</a></li>
 							<li><a href="#">Contato</a></li>
 						</ul>
@@ -54,14 +56,14 @@
 			   	<li style="background-image: url(/assets/img_bg_2.jpg);">
 			   		<div class="overlay-gradient"></div>
 			   		<div class="container">
-			   			<div class="row">
+			   			<div class="row" style="margin-left: 25%; margin-right: 25%;">
 				   			<div class="col-md-8 col-md-offset-2 text-center slider-text">
 				   				<div class="slider-text-inner">
-				   					<h1>ENEMÔMETRO</h1>
+				   					<h1 style="font-size: 350%;">ENEMÔMETRO</h1>
 				   					<h2>Comparando médias do ENEM</h2>
-									<label style="color:white;" id = "labelEstado">Selecione seu estado</label>
-									<select class="form-control" id="selectEstado" style="color:black; background-color: rgba(255,255,255,0.8);">
-										<option>AC</option>
+									<label style="color:white; " id = "labelEstado">Selecione seu estado</label>
+									<select class="custom-select custom-select-lg mb-3" id="selectEstado" style="color:black; background-color: rgba(255,255,255,0.8);">
+										<option style=>AC</option>
 										<option>AL</option>
 										<option>AM</option>
 										<option>AP</option>
@@ -89,7 +91,7 @@
 										<option>SE</option>
 										<option>TO</option>
 									</select><br>
-									<select class="form-control" id="selectAno" style="visibility: hidden; color:black; background-color: rgba(255,255,255,0.8);">
+									<select class="custom-select custom-select-lg mb-3" id="selectAno" style="visibility: hidden; color:black; background-color: rgba(255,255,255,0.8);">
 										<option>2016</option>
 										<option>2017</option>
 										<option disabled>2018</option>
@@ -329,6 +331,19 @@
 				</div>
 			</div>
 		</div>
+	</div>
+	<div id="fh5co-register" style="background-image: url(/assets/img_bg_2.jpg);">
+		<div class="overlay"></div>
+			<div class="row">
+				<div class="col-md-8 col-md-offset-2 animate-box" style=" margin-left: 15%; margin-right: 15%;">
+					<div class="date-counter text-center">
+						<h2 class="text-center slider-text">ENEM 2019</h2>
+						<h3>Contagem regressiva para o início das provas</h3>
+						<div class="simply-countdown simply-countdown-one"></div>
+						<p><strong>Não perca a data!</strong></p>
+					</div>
+				</div>
+			</div>
 	</div>
 
 	
@@ -616,7 +631,7 @@
         // year: d.getFullYear(),
         // month: d.getMonth() + 1,
 		// day: d.getDate()
-		year: 2020,
+		year: 2019,
 		month: 11,
 		day: 3
     });
@@ -629,5 +644,6 @@
         enableUtc: false
     });
 	</script>
+	
 	</body>
 </html>
