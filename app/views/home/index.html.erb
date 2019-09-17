@@ -89,20 +89,19 @@
 										<option>SE</option>
 										<option>TO</option>
 									</select><br>
-									<select class="custom-select custom-select-lg mb-3" id="selectAno" style="visibility: hidden; color:black; background-color: rgba(255,255,255,0.8);" onchange="desenhaGrafico();">
+									<select class="custom-select custom-select-lg mb-3" id="selectAno" style="visibility: hidden; color:black; background-color: rgba(255,255,255,0.8);">
 										<option>2016</option>
 										<option>2017</option>
 										<option disabled>2018</option>
 									</select><br>
 									<input class="form-control" style="color:black; visibility: hidden; background-color: rgba(255,255,255,0.8);" id = "caixaCidade" type="text" placeholder="Qual a sua cidade?">
-									<button type="button" style="visibility: hidden;" id = "botaozinho" class="btn btn-info">Buscar</button>
-				   				</div>
+									<button type="button"  id="botaozin"class="btn btn-dark" style="visibility: hidden; margin-top: 5%;" onclick="desenhaGrafico();">Buscar</button>
 				   			</div>
 				   		</div>
 			   		</div>
 				   </li>
 	</aside>
-	<div id="chart_div">
+	<div id="chart_div" style="margin-left: 25%; margin-right: 25%;">
 
 	</div>
 <!--
@@ -292,7 +291,7 @@
 		<div class="overlay"></div>
 		<div class="container">
 			<div class="row animate-box">
-				<div class="col-md-6 col-md-offset-3 text-center fh5co-heading">
+				<div class="col-md-6 col-md-offset-3 text-center fh5co-heading" style="margin-left: 25%; margin-right: 25%;">
 					<h2><span>Idealizadores</span></h2>
 				</div>
 			</div>

@@ -5,6 +5,7 @@ $(document).ready(function(){
       carregaBanco(document.getElementById("selectEstado").value);
       document.getElementById("caixaCidade").style.visibility = "visible";
       document.getElementById("selectAno").style.visibility = "visible";
+      document.getElementById("botaozin").style.visibility ="visible";
     });
     $(function(){
         $('#caixaCidade').autocomplete({
