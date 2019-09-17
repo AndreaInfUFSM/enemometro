@@ -25,8 +25,6 @@
 	<body onload="initialize()">
 
 	<div class="fh5co-loader"></div>
-	<div id="chart_div">
-	</div>
 	<div id="page">
 	<nav class="fh5co-nav" role="navigation">
 		<div class="top-menu">
@@ -91,7 +89,7 @@
 										<option>SE</option>
 										<option>TO</option>
 									</select><br>
-									<select class="custom-select custom-select-lg mb-3" id="selectAno" style="visibility: hidden; color:black; background-color: rgba(255,255,255,0.8);">
+									<select class="custom-select custom-select-lg mb-3" id="selectAno" style="visibility: hidden; color:black; background-color: rgba(255,255,255,0.8);" onchange="desenhaGrafico();">
 										<option>2016</option>
 										<option>2017</option>
 										<option disabled>2018</option>
@@ -102,8 +100,11 @@
 				   			</div>
 				   		</div>
 			   		</div>
-			   	</li>
+				   </li>
 	</aside>
+	<div id="chart_div">
+
+	</div>
 <!--
 	<div id="fh5co-course-categories">
 		<div class="container">
