@@ -1,19 +1,6 @@
-function criaPesquisa(value){
- 	var span = "";
- 	span = value;
- 	span.innerHTML = `
- 	<td>
-	    <td>&nbsp;</td>
-	    <div class="md-form active-cyan active-cyan-2 mb-3" id="campo_cidade">
-	 	    <legend>Pesquisar</legend><input class="form-control" style=" width: 40%; margin-left: 9%;" type="text" placeholder="Cidade..." aria-label="Search" id="estado">
-		</div>
-		<td>&nbsp;</td>
-	</td>`;
-}
-
-function preencheLocal(value)
+function preencheLocal(value1, value2)
 {
-    document.getElementById("cidadeNome").innerHTML = `Você está em: ` + value;
+    document.getElementById("cidadeNome").innerHTML = `Você está em: ` + value1 + ', ' + value2;
 }
 
 function Geo_location(){
@@ -52,61 +39,133 @@ function showError(error) {
 }
 
 function handleLocationError(browserHasGeolocation, infoWindow, pos) {
-infoWindow.setPosition(pos);
-infoWindow.setContent(browserHasGeolocation ?
-                        'Error: The Geolocation service failed.' :
-                        'Error: Your browser doesn\'t support geolocation.');
-infoWindow.open(map);
+    infoWindow.setPosition(pos);
+    infoWindow.setContent(browserHasGeolocation ?
+                            'Error: The Geolocation service failed.' :
+                            'Error: Your browser doesn\'t support geolocation.');
+    infoWindow.open(map);
 }
 
 // Funções para exibir a geolocalização e cidade ao carregar a página
 var geocoder;
 var cityName;
+var estado;
 //Get the latitude and the longitude;
 function successFunction2(position) {
-var lat = position.coords.latitude;
-var lng = position.coords.longitude;
-preencheLocal();
-codeLatLng(lat, lng)
+    var lng = position.coords.longitude;
+    var lat = position.coords.latitude;
+    codeLatLng(lat, lng);
 }
 
 function initialize() {
-geocoder = new google.maps.Geocoder();
-if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(successFunction2, errorFunction);
-} 
+    geocoder = new google.maps.Geocoder();
+    if (navigator.geolocation) 
+    {
+        navigator.geolocation.getCurrentPosition(successFunction2, errorFunction);
+    } 
+    successFunction2(geocoder);
+}
 
-successFunction2(geocoder);
+function consultaAoLoad(cidade, uf)
+{
+    $.ajax({
+        type:'POST',
+        url:'/' +'?nocidade='+ cidade +
+                 '&SG_UF_ESC=' + uf +
+                 '&ano=2017',
+        success:function(cidade){
+          var initialC = 0;
+          var initialR = 0;
+          var limitC  = 0;
+          var limitR = 0;
+  
+          if(cidade != undefined)
+          {
+            console.log("Cidade: "+ cidade.NO_MUNICIPIO_ESC);
+            console.log("Média: " + cidade.MED);
+            console.log("Média: " + cidade.rank);
+            if(limitR == 0 && limitR == 0){
+              limitC = cidade.MED;
+              limitR = cidade.rank;
+              $("#cntMedia").countTo({from: initialC, to: limitC});
+              $("#rnkNacional").countTo({from: initialR, to: limitR});
+            }
+            else if(limitC > 0 && limitR > 0){
+              if(cidade.MED > limitC){
+                initialC =  cidade.MED - limitC;
+                limitC - cidade.MED;
+              }
+              else if(cidade.MED < limitC){
+                initialC = limitC - cidade.MED;
+                limitC - cidade.MED;
+              }
+              if(cidade.rank > limitR){
+                initialR = cidade.rank - limitR;
+                limitR = cidade.rank;
+  
+              }
+              else if (cidade.rank < limitR){
+                initialR = limitR - cidade.rank;
+                limitR = cidade.rank;
+              }
+            }
+            $("#cntMedia").countTo({from: initialC, to: limitC});
+            $("#rnkNacional").countTo({from: initialR, to: limitR});
+            var elemento = document.getElementById("fh5co-counter");
+            elemento.scrollIntoView({
+              behavior: 'smooth'
+            });
+          }
+          else
+          {
+            alert("Cidade não encontrada!");
+          }
+        },
+        error: function(){
+          alert("Erro na busca!");
+        }
+      });  
 }
 
 function codeLatLng(lat, lng) {
-
-var latlng = new google.maps.LatLng(lat, lng);
-geocoder.geocode({'latLng': latlng}, function(results, status) {
-    if (status == google.maps.GeocoderStatus.OK) {
-    console.log(results)
-    if (results[1]) {
-    //find country name
+    var latlng = new google.maps.LatLng(lat, lng);
+    geocoder.geocode({'latLng': latlng}, function(results, status) {
+        if (status == google.maps.GeocoderStatus.OK) {
+        console.log(results)
+        if (results[1]) {
+        //Procura nome da cidade
             for (var i=0; i<results[0].address_components.length; i++) {
-        for (var b=0;b<results[0].address_components[i].types.length;b++) {
-
-        //there are different types that might hold a city admin_area_lvl_1 usually does in come cases looking for sublocality type will be more appropriate
-            if (results[0].address_components[i].types[b] == "administrative_area_level_2") {
-                //this is the object you are looking for
-                city= results[0].address_components[i];
-                cityName = city.long_name;
-                break;
+                for (var b=0;b<results[0].address_components[i].types.length;b++) {
+                //As cidades brasileiras são representadas pela área administrativa nível 2, em outros países pode mudar
+                    if (results[0].address_components[i].types[b] == "administrative_area_level_2") {
+                        city= results[0].address_components[i];
+                        cityName = city.long_name;
+                        break;
+                    }
+                }
+            }  
+            for (var i=0; i<results[0].address_components.length; i++) {
+                for (var b=0;b<results[0].address_components[i].types.length;b++) {
+                    if (results[0].address_components[i].types[b] == "administrative_area_level_1") {
+                        estado = results[0].address_components[i];
+                        UF = estado.short_name;
+                        break;
+                    }
+                }
+            }  
+        } 
+            else 
+            {
+                alert("No results found");
             }
+        } 
+        else 
+        {
+            alert("Geocoder failed due to: " + status);
         }
-    }    
-    } else {
-        alert("No results found");
-    }
-    } else {
-    alert("Geocoder failed due to: " + status);
-    }
-    preencheLocal(cityName);
-});
+        preencheLocal(cityName, UF);
+        consultaAoLoad(cityName, UF);
+    });
 }
 
 	

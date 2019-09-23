@@ -17,7 +17,6 @@ $(document).ready(function(){
             minLength: 3,
         });
     });
-    
     $('#caixaCidade').keypress(function(e){
       if(e.keyCode==13){
         if(document.getElementById("caixaCidade").style.visibility == "visible")
