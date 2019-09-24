@@ -72,18 +72,17 @@ function consultaAoLoad(cidade, uf)
         type:'POST',
         url:'/' +'?nocidade='+ cidade +
                  '&SG_UF_ESC=' + uf +
-                 '&ano=2017',
+                 '&ano=2018',
         success:function(cidade){
           var initialC = 0;
           var initialR = 0;
           var limitC  = 0;
           var limitR = 0;
-  
           if(cidade != undefined)
           {
             console.log("Cidade: "+ cidade.NO_MUNICIPIO_ESC);
             console.log("Média: " + cidade.MED);
-            console.log("Média: " + cidade.rank);
+            console.log("Pos. Rank: " + cidade.rank);
             if(limitR == 0 && limitR == 0){
               limitC = cidade.MED;
               limitR = cidade.rank;
@@ -167,5 +166,3 @@ function codeLatLng(lat, lng) {
         consultaAoLoad(cityName, UF);
     });
 }
-
-	

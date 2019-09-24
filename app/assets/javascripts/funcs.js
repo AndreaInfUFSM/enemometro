@@ -30,7 +30,6 @@ $(document).ready(function(){
 // fetch do DB retornando as cidades em JSON
 function carregaBanco(val)
 {
-  console.log('jaaj');
   $.ajax({
     type: 'GET',
     url: '/'+'?inic=TRUE&SG_UF_ESC=' + val,
@@ -61,7 +60,7 @@ var callExecuter=function(){
         {
           console.log("Cidade: "+ cidade.NO_MUNICIPIO_ESC);
           console.log("Média: " + cidade.MED);
-          console.log("Média: " + cidade.rank);
+          console.log("Pos.Rank: " + cidade.rank);
           if(limitR == 0 && limitR == 0){
             limitC = cidade.MED;
             limitR = cidade.rank;
@@ -104,7 +103,20 @@ var callExecuter=function(){
       }
     });
   }
-
+  var json = [];
+  function clickGrafico()
+  {
+    $.ajax({
+      type:'POST',
+      url:'/?tipo=graph' +'&nocidade='+ document.getElementById("caixaCidade").value +
+               '&SG_UF_ESC=' + document.getElementById("selectEstado").value,
+      success:function(jason){
+      console.log(JSON.stringify(jason));
+      json = jason;
+      desenhaGrafico();
+      }
+    });
+  }
   function desenhaGrafico(){ 
     console.log("entrei na desenha.");  
        // Load the Visualization API and the corechart package.
@@ -119,22 +131,18 @@ var callExecuter=function(){
           console.log("cheguei no draw.");
           // Create the data table.
           var data = new google.visualization.DataTable();
-          data.addColumn('string', 'Topping');
-          data.addColumn('number', 'Slices');
-          data.addRows([
-            ['Português', 680],
-            ['Inglês', 600],
-            ['Ciências da Natureza', 450],
-            ['Redação', 800]
-          ]);
+          data.addColumn('string', 'Ano');
+          data.addColumn('number', 'Média');
+          data.addRows(json);
   
           // Set chart options
-          var options = {'title':'Média por área',
+          var options = {'title':'Média por Ano',
                          'width':700,
-                         'height':600};
+                         'height':600
+                        };
   
           // Instantiate and draw our chart, passing in some options.
-          var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+          var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
           chart.draw(data, options);
         }
       }
