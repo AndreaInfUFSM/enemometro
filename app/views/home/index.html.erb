@@ -52,52 +52,98 @@
 			   	<li style="background-image: url(/assets/img_bg_2.jpg);">
 			   		<div class="overlay-gradient"></div>
 			   		<div class="container">
-			   			<div class="row" style="margin-left: 25%; margin-right: 25%;">
+			   			<div class="row">
 				   			<div class="col-md-8 col-md-offset-2 text-center slider-text">
 				   				<div class="slider-text-inner">
 				   					<h1 style="font-size: 350%;">ENEMÔMETRO</h1>
 				   					<h2>Comparando médias do ENEM</h2>
 									<label style="color:white; " id = "labelEstado">Selecione seu estado</label>
-									<select class="custom-select custom-select-lg mb-3" id="selectEstado" style="color:black; background-color: rgba(255,255,255,0.8);">
-										<option>Selecione</option>
-										<option>AC</option>
-										<option>AL</option>
-										<option>AM</option>
-										<option>AP</option>
-										<option>BA</option>
-										<option>CE</option>
-										<option>DF</option>
-										<option>ES</option>
-										<option>GO</option>
-										<option>MA</option>
-										<option>MG</option>
-										<option>MS</option>
-										<option>MT</option>
-										<option>PA</option>
-										<option>PB</option>
-										<option>PE</option>
-										<option>PI</option>
-										<option>PR</option>
-										<option>RJ</option>
-										<option>RN</option>
-										<option>RO</option>
-										<option>RR</option>
-										<option>RS</option>
-										<option>SC</option>
-										<option>SP</option>
-										<option>SE</option>
-										<option>TO</option>
-									</select><br>
-									<select class="custom-select custom-select-lg mb-3" id="selectAno" style="visibility: hidden; color:black; background-color: rgba(255,255,255,0.8);">
-										<option>2013</option>
-										<option>2014</option>
-										<option>2015</option>
-										<option>2016</option>
-										<option>2017</option>
-										<option>2018</option>
-									</select><br>
-									<input class="form-control" style="color:black; visibility: hidden; background-color: rgba(255,255,255,0.8);" id = "caixaCidade" type="text" placeholder="Qual a sua cidade?">
-									<button type="button" id="botaozin"class="btn btn-dark" style="visibility: hidden; margin-top: 5%;" onclick="clickGrafico();">Buscar</button>
+									<table style="margin-left: 25%; margin-right: 25%;">
+									<td style="padding-right:15%;">
+										<select class="custom-select custom-select-lg mb-3" id="selectEstado" style="color:black; background-color: rgba(255,255,255,0.8);">
+											<option>Selecione</option>
+											<option>AC</option>
+											<option>AL</option>
+											<option>AM</option>
+											<option>AP</option>
+											<option>BA</option>
+											<option>CE</option>
+											<option>DF</option>
+											<option>ES</option>
+											<option>GO</option>
+											<option>MA</option>
+											<option>MG</option>
+											<option>MS</option>
+											<option>MT</option>
+											<option>PA</option>
+											<option>PB</option>
+											<option>PE</option>
+											<option>PI</option>
+											<option>PR</option>
+											<option>RJ</option>
+											<option>RN</option>
+											<option>RO</option>
+											<option>RR</option>
+											<option>RS</option>
+											<option>SC</option>
+											<option>SP</option>
+											<option>SE</option>
+											<option>TO</option>
+										</select><br>
+										<select class="custom-select custom-select-lg mb-3" id="selectAno" style="visibility: hidden; color:black; background-color: rgba(255,255,255,0.8);">
+											<option>2013</option>
+											<option>2014</option>
+											<option>2015</option>
+											<option>2016</option>
+											<option>2017</option>
+											<option>2018</option>
+										</select><br>
+										<input class="form-control" style="color:black; visibility: hidden; background-color: rgba(255,255,255,0.8);" id = "caixaCidade" type="text" placeholder="Qual a sua cidade?">
+										<button type="button" id="botaozin"class="btn btn-dark" style="visibility: hidden; margin-top: 5%;" onclick="clickGrafico();">Buscar</button>
+									</td>
+									<td style="padding-left: 15%;">
+										<select class="custom-select custom-select-lg mb-3" id="selectEstado" style="color:black; background-color: rgba(255,255,255,0.8);">
+											<option>Selecione</option>
+											<option>AC</option>
+											<option>AL</option>
+											<option>AM</option>
+											<option>AP</option>
+											<option>BA</option>
+											<option>CE</option>
+											<option>DF</option>
+											<option>ES</option>
+											<option>GO</option>
+											<option>MA</option>
+											<option>MG</option>
+											<option>MS</option>
+											<option>MT</option>
+											<option>PA</option>
+											<option>PB</option>
+											<option>PE</option>
+											<option>PI</option>
+											<option>PR</option>
+											<option>RJ</option>
+											<option>RN</option>
+											<option>RO</option>
+											<option>RR</option>
+											<option>RS</option>
+											<option>SC</option>
+											<option>SP</option>
+											<option>SE</option>
+											<option>TO</option>
+										</select><br>
+										<select class="custom-select custom-select-lg mb-3" id="selectAno" style="visibility: hidden; color:black; background-color: rgba(255,255,255,0.8);">
+											<option>2013</option>
+											<option>2014</option>
+											<option>2015</option>
+											<option>2016</option>
+											<option>2017</option>
+											<option>2018</option>
+										</select><br>
+										<input class="form-control" style="color:black; visibility: hidden; background-color: rgba(255,255,255,0.8);" id = "caixaCidade" type="text" placeholder="Qual a sua cidade?">
+										<button type="button" id="botaozin"class="btn btn-dark" style="visibility: hidden; margin-top: 5%;" onclick="clickGrafico();">Buscar</button>
+									</td>
+									</table>
 				   			</div>
 				   		</div>
 			   		</div>

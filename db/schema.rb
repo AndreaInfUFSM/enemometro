@@ -78,14 +78,14 @@ ActiveRecord::Schema.define(version: 2019_09_22_060055) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "med2016_cidades", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "med2016_cidades", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "CO_MUNICIPIO_ESC"
     t.string "NO_MUNICIPIO_ESC"
     t.string "SG_UF_ESC"
     t.float "MED"
+    t.integer "rank"
     t.datetime "created_at", default: "2019-09-04 00:00:00", null: false
     t.datetime "updated_at", default: "2019-09-04 00:00:00", null: false
-    t.integer "rank"
   end
 
   create_table "med2016_escolas", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -97,7 +97,6 @@ ActiveRecord::Schema.define(version: 2019_09_22_060055) do
     t.string "NO_ESCOLA"
     t.datetime "created_at", default: "2019-09-04 00:00:00", null: false
     t.datetime "updated_at", default: "2019-09-04 00:00:00", null: false
-    t.integer "rank"
   end
 
   create_table "med2017_cidades", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -105,9 +104,9 @@ ActiveRecord::Schema.define(version: 2019_09_22_060055) do
     t.string "NO_MUNICIPIO_ESC"
     t.string "SG_UF_ESC"
     t.float "MED"
+    t.integer "rank"
     t.datetime "created_at", default: "2019-09-04 00:00:00", null: false
     t.datetime "updated_at", default: "2019-09-04 00:00:00", null: false
-    t.integer "rank"
   end
 
   create_table "med2017_escolas", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -119,7 +118,6 @@ ActiveRecord::Schema.define(version: 2019_09_22_060055) do
     t.string "NO_ESCOLA"
     t.datetime "created_at", default: "2019-09-04 00:00:00", null: false
     t.datetime "updated_at", default: "2019-09-04 00:00:00", null: false
-    t.integer "rank"
   end
 
   create_table "med2018_cidades", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
