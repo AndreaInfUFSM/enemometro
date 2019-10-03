@@ -28,7 +28,7 @@ class HomeController < ApplicationController
             render json: @cidade
         elsif params[:tipo] == 'graph'
             vetor = []
-            # Força de gambiarra
+            # Força de gambiarra2
             for i in 2013..2018
                 @sql = ActiveRecord::Base.connection.exec_query("SELECT MED FROM med"+i.to_s+"_cidades WHERE NO_MUNICIPIO_ESC LIKE " + "'" + params[:nocidade] +  "'" + " AND SG_UF_ESC = " + "'" + params[:SG_UF_ESC] + "'" + " ").rows
                 vetor.push([i.to_s, @sql[0][0]])

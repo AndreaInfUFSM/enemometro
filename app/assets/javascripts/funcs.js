@@ -7,6 +7,12 @@ $(document).ready(function(){
       document.getElementById("selectAno").style.visibility = "visible";
       document.getElementById("botaozin").style.visibility ="visible";
     });
+    $("#selectEstado2").change(function(){
+      carregaBanco(document.getElementById("selectEstado").value);
+      document.getElementById("caixaCidade2").style.visibility = "visible";
+      document.getElementById("selectAno2").style.visibility = "visible";
+      document.getElementById("botaozin").style.visibility ="visible";
+    });
     $(function(){
         $('#caixaCidade').autocomplete({
             source: function(request, response) {
@@ -17,10 +23,32 @@ $(document).ready(function(){
             minLength: 3,
         });
     });
+    $(function(){
+      $('#caixaCidade2').autocomplete({
+          source: function(request, response) {
+            var results = $.ui.autocomplete.filter(arr, request.term);
+            response(results.slice(0, 12));
+        },        
+          delay:  50,
+          minLength: 3,
+      });
+  });
     $('#caixaCidade').keypress(function(e){
       if(e.keyCode==13){
         if(document.getElementById("caixaCidade").style.visibility == "visible")
-          callExecuter();
+          callExecuter(document.getElementById("caixaCidade").value,
+          document.getElementById("selectEstado").value,
+          document.getElementById("selectAno").value);
+        else
+          alert("Selecione o seu estado");
+      }
+    });
+    $('#caixaCidade2').keypress(function(e){
+      if(e.keyCode==13){
+        if(document.getElementById("caixaCidade2").style.visibility == "visible")
+          callExecuter(document.getElementById("caixaCidade2").value,
+          document.getElementById("selectEstado2").value,
+          document.getElementById("selectAno2").value);
         else
           alert("Selecione o seu estado");
       }
@@ -44,12 +72,12 @@ function carregaBanco(val)
   });
 }
 
-var callExecuter=function(){
+var callExecuter=function(nocidade, sg_uf, ano){
     $.ajax({
       type:'POST',
-      url:'/' +'?nocidade='+ document.getElementById("caixaCidade").value +
-               '&SG_UF_ESC=' + document.getElementById("selectEstado").value +
-               '&ano=' + document.getElementById("selectAno").value,
+      url:'/' +'?nocidade='+ nocidade +
+               '&SG_UF_ESC=' + sg_uf +
+               '&ano=' + ano,
       success:function(cidade){
         var initialC = 0;
         var initialR = 0;
