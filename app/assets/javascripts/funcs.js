@@ -1,14 +1,14 @@
-var res = [], arr = [];
+var res = [], arr = [], arr2 = [];
 
 $(document).ready(function(){
     $("#selectEstado").change(function(){
-      carregaBanco(document.getElementById("selectEstado").value);
+      carregaBanco(document.getElementById("selectEstado").value, 1);
       document.getElementById("caixaCidade").style.visibility = "visible";
       document.getElementById("selectAno").style.visibility = "visible";
       document.getElementById("botaozin").style.visibility ="visible";
     });
     $("#selectEstado2").change(function(){
-      carregaBanco(document.getElementById("selectEstado").value);
+      carregaBanco(document.getElementById("selectEstado2").value, 2);
       document.getElementById("caixaCidade2").style.visibility = "visible";
       document.getElementById("selectAno2").style.visibility = "visible";
       document.getElementById("botaozin").style.visibility ="visible";
@@ -26,7 +26,7 @@ $(document).ready(function(){
     $(function(){
       $('#caixaCidade2').autocomplete({
           source: function(request, response) {
-            var results = $.ui.autocomplete.filter(arr, request.term);
+            var results = $.ui.autocomplete.filter(arr2, request.term);
             response(results.slice(0, 12));
         },        
           delay:  50,
@@ -56,17 +56,30 @@ $(document).ready(function(){
 });
 
 // fetch do DB retornando as cidades em JSON
-function carregaBanco(val)
+// opc = 1: Coluna da primeira cidade
+// opc = 2: Coluna da segunda cidade
+function carregaBanco(val, opc)
 {
   $.ajax({
     type: 'GET',
     url: '/'+'?inic=TRUE&SG_UF_ESC=' + val,
     success: function(data){
-      arr = [];
       res = data;
-      for(var i = 0; i < res.length; i++)
+      if(opc == 1)
       {
-        arr.push(res[i]);
+        arr = [];
+        for(var i = 0; i < res.length; i++)
+        {
+          arr.push(res[i]);
+        }
+      }
+      else if (opc == 2)
+      {
+        arr2 = [];
+        for(var i = 0; i < res.length; i++)
+        {
+          arr2.push(res[i]);
+        }
       }
     }
   });
@@ -134,16 +147,21 @@ var callExecuter=function(nocidade, sg_uf, ano){
   var json = [];
   function clickGrafico()
   {
-    $.ajax({
-      type:'POST',
-      url:'/?tipo=graph' +'&nocidade='+ document.getElementById("caixaCidade").value +
-               '&SG_UF_ESC=' + document.getElementById("selectEstado").value,
-      success:function(jason){
-      console.log(JSON.stringify(jason));
-      json = jason;
-      desenhaGrafico();
-      }
-    });
+    if(document.getElementById("caixaCidade").value != '' && document.getElementById("caixaCidade2").value != '')
+    {
+      $.ajax({
+        type:'POST',
+        url:'/?tipo=graph' +'&nocidade1='+ document.getElementById("caixaCidade").value +
+                '&SG_UF_ESC1=' + document.getElementById("selectEstado").value +
+                '&nocidade2=' + document.getElementById("caixaCidade2").value +
+                '&SG_UF_ESC2=' + document.getElementById("selectEstado2").value,
+        success:function(jason){
+        console.log(JSON.stringify(jason));
+        json = jason;
+        desenhaGrafico();
+        }
+      });
+    }
   }
   function desenhaGrafico(){ 
     console.log("entrei na desenha.");  
@@ -160,17 +178,21 @@ var callExecuter=function(nocidade, sg_uf, ano){
           // Create the data table.
           var data = new google.visualization.DataTable();
           data.addColumn('string', 'Ano');
-          data.addColumn('number', 'Média');
+          data.addColumn('number', document.getElementById("caixaCidade").value);
+          data.addColumn('number', document.getElementById("caixaCidade2").value);
           data.addRows(json);
   
           // Set chart options
-          var options = {'title':'Média por Ano',
-                         'width':700,
-                         'height':600
+          var options = {'title':'Média das cidades por ano',
+                         'width':1000,
+                         'height':600,
+                         'pointSize': 4,
+                         'lineWidth': 2,
+                         'legend': 'bottom'
                         };
   
           // Instantiate and draw our chart, passing in some options.
-          var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+          var chart = new google.visualization.AreaChart(document.getElementById('chart_div'));
           chart.draw(data, options);
         }
       }

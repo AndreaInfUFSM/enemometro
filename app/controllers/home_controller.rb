@@ -3,7 +3,7 @@ class HomeController < ApplicationController
     
     def index
         if params[:inic]
-            @listacidades = Med2016Cidade.where('SG_UF_ESC = ?',params[:SG_UF_ESC]).order(:NO_MUNICIPIO_ESC).pluck(:NO_MUNICIPIO_ESC)
+            @listacidades = Med2015Cidade.where('SG_UF_ESC = ?',params[:SG_UF_ESC]).order(:NO_MUNICIPIO_ESC).pluck(:NO_MUNICIPIO_ESC)
             render json: @listacidades
         end    
     end
@@ -26,15 +26,16 @@ class HomeController < ApplicationController
         elsif params[:ano] == '2015'
             @cidade = Med2015Cidade.where('NO_MUNICIPIO_ESC LIKE ? AND SG_UF_ESC = ?', params[:nocidade], params[:SG_UF_ESC]).take
             render json: @cidade
+        
+        # Força de gambiarra
         elsif params[:tipo] == 'graph'
             vetor = []
-            # Força de gambiarra2
             for i in 2013..2018
-                @sql = ActiveRecord::Base.connection.exec_query("SELECT MED FROM med"+i.to_s+"_cidades WHERE NO_MUNICIPIO_ESC LIKE " + "'" + params[:nocidade] +  "'" + " AND SG_UF_ESC = " + "'" + params[:SG_UF_ESC] + "'" + " ").rows
-                vetor.push([i.to_s, @sql[0][0]])
+                @sql = ActiveRecord::Base.connection.exec_query("SELECT MED FROM med"+i.to_s+"_cidades WHERE NO_MUNICIPIO_ESC LIKE " + "'" + params[:nocidade1] +  "'" + " AND SG_UF_ESC = " + "'" + params[:SG_UF_ESC1] + "'" + " ").rows
+                @sql2 = ActiveRecord::Base.connection.exec_query("SELECT MED FROM med"+i.to_s+"_cidades WHERE NO_MUNICIPIO_ESC LIKE " + "'" + params[:nocidade2] +  "'" + " AND SG_UF_ESC = " + "'" + params[:SG_UF_ESC2] + "'" + " ").rows
+                vetor.push([i.to_s, @sql[0][0], @sql2[0][0]])
             end
             render json: vetor
         end
     end
-
 end
