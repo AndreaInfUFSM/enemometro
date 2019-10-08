@@ -1,59 +1,126 @@
 var res = [], arr = [], arr2 = [];
 
 $(document).ready(function(){
-    $("#selectEstado").change(function(){
-      carregaBanco(document.getElementById("selectEstado").value, 1);
-      document.getElementById("caixaCidade").style.visibility = "visible";
-      document.getElementById("selectAno").style.visibility = "visible";
-      document.getElementById("botaozin").style.visibility ="visible";
-    });
-    $("#selectEstado2").change(function(){
-      carregaBanco(document.getElementById("selectEstado2").value, 2);
-      document.getElementById("caixaCidade2").style.visibility = "visible";
-      document.getElementById("selectAno2").style.visibility = "visible";
-      document.getElementById("botaozin").style.visibility ="visible";
-    });
-    $(function(){
-        $('#caixaCidade').autocomplete({
-            source: function(request, response) {
-              var results = $.ui.autocomplete.filter(arr, request.term);
-              response(results.slice(0, 12));
-          },        
-            delay:  50,
-            minLength: 3,
-        });
-    });
-    $(function(){
-      $('#caixaCidade2').autocomplete({
-          source: function(request, response) {
-            var results = $.ui.autocomplete.filter(arr2, request.term);
-            response(results.slice(0, 12));
-        },        
-          delay:  50,
-          minLength: 3,
-      });
+  $("#chart_div").on('DOMSubtreeModified',function(){
+    var elm = document.getElementById("chart_div");
+    elm.scrollIntoView({behavior: "smooth"});
   });
-    $('#caixaCidade').keypress(function(e){
-      if(e.keyCode==13){
-        if(document.getElementById("caixaCidade").style.visibility == "visible")
-          callExecuter(document.getElementById("caixaCidade").value,
-          document.getElementById("selectEstado").value,
-          document.getElementById("selectAno").value);
-        else
-          alert("Selecione o seu estado");
-      }
-    });
-    $('#caixaCidade2').keypress(function(e){
-      if(e.keyCode==13){
-        if(document.getElementById("caixaCidade2").style.visibility == "visible")
-          callExecuter(document.getElementById("caixaCidade2").value,
-          document.getElementById("selectEstado2").value,
-          document.getElementById("selectAno2").value);
-        else
-          alert("Selecione o seu estado");
+
+  $("#selectComparacao").change(function(){
+      if(document.getElementById("selectComparacao").value == "cdXcd")
+      {
+         var span = '';
+         span = document.getElementById("inputs");
+         span.innerHTML = `
+         <div class="card-group">
+										<div class="card bg-dark text-white">
+												<div class="card-body"   style="background-color:rgba(55,64,53,0.7);">
+													<h5 class="card-title">Selecione a primeira cidade</h5>
+													<select class="custom-select custom-select-lg mb-3" id="selectEstado" style="color:black; background-color: rgba(255,255,255,0.8);">
+												<option>Selecione</option>
+												<option>AC</option>
+												<option>AL</option>
+												<option>AM</option>
+												<option>AP</option>
+												<option>BA</option>
+												<option>CE</option>
+												<option>DF</option>
+												<option>ES</option>
+												<option>GO</option>
+												<option>MA</option>
+												<option>MG</option>
+												<option>MS</option>
+												<option>MT</option>
+												<option>PA</option>
+												<option>PB</option>
+												<option>PE</option>
+												<option>PI</option>
+												<option>PR</option>
+												<option>RJ</option>
+												<option>RN</option>
+												<option>RO</option>
+												<option>RR</option>
+												<option>RS</option>
+												<option>SC</option>
+												<option>SP</option>
+												<option>SE</option>
+												<option>TO</option>
+											</select><br>
+											<input class="form-control" style="color:black; background-color: rgba(255,255,255,0.8);" id = "caixaCidade" type="text" required placeholder="Qual a sua cidade?">
+										</div>
+										</div>
+										<div class="card bg-dark text-white">
+											<div class="card-body"   style="background-color:rgba(55,64,53,0.7);">
+												<h5 class="card-title">Selecione a segunda cidade</h5>
+												<select class="custom-select custom-select-lg mb-3" id="selectEstado2" style="color:black; background-color: rgba(255,255,255,0.8);">
+													<option>Selecione</option>
+													<option>AC</option>
+													<option>AL</option>
+													<option>AM</option>
+													<option>AP</option>
+													<option>BA</option>
+													<option>CE</option>
+													<option>DF</option>
+													<option>ES</option>
+													<option>GO</option>
+													<option>MA</option>
+													<option>MG</option>
+													<option>MS</option>
+													<option>MT</option>
+													<option>PA</option>
+													<option>PB</option>
+													<option>PE</option>
+													<option>PI</option>
+													<option>PR</option>
+													<option>RJ</option>
+													<option>RN</option>
+													<option>RO</option>
+													<option>RR</option>
+													<option>RS</option>
+													<option>SC</option>
+													<option>SP</option>
+													<option>SE</option>
+													<option>TO</option>
+												</select><br>
+										<input class="form-control" style="color:black; background-color: rgba(255,255,255,0.8);" id = "caixaCidade2" required type="text" placeholder="Qual a sua cidade?">
+										</div>
+										</div>
+									</div>
+         `;
+         fetchBanco();
       }
     });
 });
+
+function fetchBanco()
+{
+  $("#selectEstado").change(function(){
+    carregaBanco(document.getElementById("selectEstado").value, 1);
+  });
+  $("#selectEstado2").change(function(){
+    carregaBanco(document.getElementById("selectEstado2").value, 2);
+  });
+  $(function(){
+    $('#caixaCidade2').autocomplete({
+        source: function(request, response) {
+          var results = $.ui.autocomplete.filter(arr2, request.term);
+          response(results.slice(0, 12));
+      },        
+        delay:  50,
+        minLength: 3,
+    });
+  });
+  $(function(){
+    $('#caixaCidade').autocomplete({
+        source: function(request, response) {
+          var results = $.ui.autocomplete.filter(arr, request.term);
+          response(results.slice(0, 12));
+      },        
+        delay:  50,
+        minLength: 3,
+    });
+  });
+}
 
 // fetch do DB retornando as cidades em JSON
 // opc = 1: Coluna da primeira cidade
@@ -184,11 +251,16 @@ var callExecuter=function(nocidade, sg_uf, ano){
   
           // Set chart options
           var options = {'title':'Média das cidades por ano',
-                         'width':1000,
+                         'width':1400,
                          'height':600,
                          'pointSize': 4,
                          'lineWidth': 2,
-                         'legend': 'bottom'
+                         'legend': 'bottom',
+                         'backgroundColor': {
+                          'fill': '#FFFFFF',
+                          'opacity': 30
+                          },
+                         'is3D': true
                         };
   
           // Instantiate and draw our chart, passing in some options.

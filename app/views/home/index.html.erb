@@ -54,115 +54,22 @@
 				   				<div class="slider-text-inner">
 				   					<h1 style="font-size: 350%;margin-left: 25%; margin-right: 25%;">ENEMÔMETRO</h1>
 				   					<h2 style="margin-left: 25%; margin-right: 25%;">Comparando médias do ENEM</h2>
-									<div class="card-group">
-										<div class="card bg-dark text-white">
-												<div class="card-body"   style="background-color:rgba(55,64,53,0.7);">
-													<h5 class="card-title">Selecione a primeira cidade</h5>
-													<select class="custom-select custom-select-lg mb-3" id="selectEstado" style="color:black; background-color: rgba(255,255,255,0.8);">
-												<option>Selecione</option>
-												<option>AC</option>
-												<option>AL</option>
-												<option>AM</option>
-												<option>AP</option>
-												<option>BA</option>
-												<option>CE</option>
-												<option>DF</option>
-												<option>ES</option>
-												<option>GO</option>
-												<option>MA</option>
-												<option>MG</option>
-												<option>MS</option>
-												<option>MT</option>
-												<option>PA</option>
-												<option>PB</option>
-												<option>PE</option>
-												<option>PI</option>
-												<option>PR</option>
-												<option>RJ</option>
-												<option>RN</option>
-												<option>RO</option>
-												<option>RR</option>
-												<option>RS</option>
-												<option>SC</option>
-												<option>SP</option>
-												<option>SE</option>
-												<option>TO</option>
-											</select><br>
-											<select class="custom-select custom-select-lg mb-3" id="selectAno" style="visibility: hidden; color:black; background-color: rgba(255,255,255,0.8);">
-												<option>2013</option>
-												<option>2014</option>
-												<option>2015</option>
-												<option>2016</option>
-												<option>2017</option>
-												<option>2018</option>
-											</select><br>
-											<input class="form-control" style="color:black; visibility: hidden; background-color: rgba(255,255,255,0.8);" id = "caixaCidade" type="text" placeholder="Qual a sua cidade?">
-										</div>
-										</div>
-										<div class="card bg-dark text-white">
-											<div class="card-body"   style="background-color:rgba(55,64,53,0.7);">
-												<select class="custom-select custom-select-lg mb-3" id="selectEstado2" style="color:black; background-color: rgba(255,255,255,0.8);">
-													<option value="">Grafico...</option>
-													<option value="cdXcd" >Cidade com Cidade</option>
-													<option value="cdXEsc" disabled>Cidade com Escola</option>
-													<option value="EscXEsc" disabled>Escola com Escola</option>
-												</select>												
-											</div>
-										</div>
-										<div class="card bg-dark text-white">
-											<div class="card-body"   style="background-color:rgba(55,64,53,0.7);">
-												<h5 class="card-title">Selecione a segunda cidade</h5>
-												<select class="custom-select custom-select-lg mb-3" id="selectEstado2" style="color:black; background-color: rgba(255,255,255,0.8);">
-													<option>Selecione</option>
-													<option>AC</option>
-													<option>AL</option>
-													<option>AM</option>
-													<option>AP</option>
-													<option>BA</option>
-													<option>CE</option>
-													<option>DF</option>
-													<option>ES</option>
-													<option>GO</option>
-													<option>MA</option>
-													<option>MG</option>
-													<option>MS</option>
-													<option>MT</option>
-													<option>PA</option>
-													<option>PB</option>
-													<option>PE</option>
-													<option>PI</option>
-													<option>PR</option>
-													<option>RJ</option>
-													<option>RN</option>
-													<option>RO</option>
-													<option>RR</option>
-													<option>RS</option>
-													<option>SC</option>
-													<option>SP</option>
-													<option>SE</option>
-													<option>TO</option>
-												</select><br>
-										<select class="custom-select custom-select-lg mb-3" id="selectAno2" style="visibility: hidden; color:black; background-color: rgba(255,255,255,0.8);">
-											<option>2013</option>
-											<option>2014</option>
-											<option>2015</option>
-											<option>2016</option>
-											<option>2017</option>
-											<option>2018</option>
-										</select><br>
-										<input class="form-control" style="color:black; visibility: hidden; background-color: rgba(255,255,255,0.8);" id = "caixaCidade2" type="text" placeholder="Qual a sua cidade?">
-										</div>
-										</div>
+									<div class="card-body"   style="background-color:rgba(55,64,53,0.7);">
+										<select class="custom-select custom-select-lg mb-3" id="selectComparacao" style="color:black; background-color: rgba(255,255,255,0.8);">
+											<option value="">Grafico...</option>
+											<option value="cdXcd" >Cidade com Cidade</option>
+											<option value="cdXEsc" disabled>Cidade com Escola</option>
+											<option value="EscXEsc" disabled>Escola com Escola</option>
+										</select>												
 									</div>
-									<button type="button" id="botaozin"class="btn btn-dark" style="visibility: hidden; margin-top: 5%;" onclick="clickGrafico();">Buscar</button>
+									<span id="inputs"></span>
+									<button type="button" id="botaozin"class="btn btn-dark" style="margin-top: 5%;" onclick="clickGrafico();">Buscar</button>
 				   			</div>
 				   		</div>
 			   		</div>
 				   </li>
 	</aside>
-	<div id="chart_div" style="margin-left: 25%; margin-right: 25%;">
-
-	</div>
+	<div id="chart_div" style="background-image: url(/assets/img_bg_4.jpg);"></div>
 <!--
 	<div id="fh5co-course-categories">
 		<div class="container">
@@ -264,7 +171,7 @@
 			</div>
 		</div>
 	</div> -->	
-	<div id="fh5co-counter" class="fh5co-counters" style="background-image: url(/assets/img_bg_4.jpg);" data-stellar-background-ratio="0.5">
+	<!-- <div id="fh5co-counter" class="fh5co-counters" style="background-image: url(/assets/img_bg_4.jpg);" data-stellar-background-ratio="0.5">
 		<div class="overlay"></div>
 		<div class="container">
 			<div class="row">
@@ -287,7 +194,7 @@
 				</div>
 			</div>
 		</div>
-	</div>
+	</div> -->
 
 	<!-- <div id="fh5co-course">
 		<div class="container">
@@ -360,9 +267,10 @@
 						<div class="owl-carousel owl-carousel-fullwidth">
 								<div class="item">
 									<div class="testimony-slide active text-center">
-										<span>O Projeto<br><small>Calculo das médias</small></span>
+										<div class="user" style="background-image: url(/assets/calc.png);"></div>
+										<span>O Projeto<br><small>Cálculo das médias</small></span>
 										<blockquote>
-											<p>&ldquo;Somamos as notas das 5 competências e realizamos as médias para cada aluno, desde que o aluno não tivesse nota faltante (não necessariamente zero)&rdquo;</p>
+											<p>Para calcular a média de cada escola, realizamos uma média aritmética com as notas das cinco áreas de conhecimento (Ciências Humanas, Ciências da Natureza, Linguagens, Matemática e Redação) por aluno. Somente foram computadas as médias de alunos que não possuiam notas faltantes (não necessáriamente zero)</p>
 										</blockquote>
 									</div>
 								</div>
