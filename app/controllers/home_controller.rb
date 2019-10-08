@@ -33,7 +33,11 @@ class HomeController < ApplicationController
             for i in 2013..2018
                 @sql = ActiveRecord::Base.connection.exec_query("SELECT MED FROM med"+i.to_s+"_cidades WHERE NO_MUNICIPIO_ESC LIKE " + "'" + params[:nocidade1] +  "'" + " AND SG_UF_ESC = " + "'" + params[:SG_UF_ESC1] + "'" + " ").rows
                 @sql2 = ActiveRecord::Base.connection.exec_query("SELECT MED FROM med"+i.to_s+"_cidades WHERE NO_MUNICIPIO_ESC LIKE " + "'" + params[:nocidade2] +  "'" + " AND SG_UF_ESC = " + "'" + params[:SG_UF_ESC2] + "'" + " ").rows
-                vetor.push([i.to_s, @sql[0][0], @sql2[0][0]])
+                if @sql.count > 0 && @sql2.count > 0
+                    vetor.push([i.to_s, @sql[0][0], @sql2[0][0]])
+                else
+                    render js: "alert('Cidade não encontrada, verifique o nome das cidades informadas!')" and return
+                end
             end
             render json: vetor
         end

@@ -19,6 +19,7 @@
 	<![endif]-->
 	</head>
 	<body>
+
 	<div class="fh5co-loader"></div>
 	<div id="page">
 	<nav class="fh5co-nav" role="navigation">
@@ -56,7 +57,7 @@
 				   					<h2 style="margin-left: 25%; margin-right: 25%;">Comparando médias do ENEM</h2>
 									<div class="card-body"   style="background-color:rgba(55,64,53,0.7);">
 										<select class="custom-select custom-select-lg mb-3" id="selectComparacao" style="color:black; background-color: rgba(255,255,255,0.8);">
-											<option value="">Grafico...</option>
+											<option value="">Selecione o tipo de comparação...</option>
 											<option value="cdXcd" >Cidade com Cidade</option>
 											<option value="cdXEsc" disabled>Cidade com Escola</option>
 											<option value="EscXEsc" disabled>Escola com Escola</option>
@@ -64,11 +65,16 @@
 									</div>
 									<span id="inputs"></span>
 									<button type="button" id="botaozin"class="btn btn-dark" style="margin-top: 5%;" onclick="clickGrafico();">Buscar</button>
-				   			</div>
+				   					<br><br>
+									<div class="d-flex justify-content-center">
+									   <div class="loader" style="display:none;"></div>
+									</div>
+							   </div>
 				   		</div>
 			   		</div>
 				   </li>
 	</aside>
+	
 	<div id="chart_div" style="background-image: url(/assets/img_bg_4.jpg);"></div>
 <!--
 	<div id="fh5co-course-categories">

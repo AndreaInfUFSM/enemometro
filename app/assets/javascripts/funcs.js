@@ -216,6 +216,7 @@ var callExecuter=function(nocidade, sg_uf, ano){
   {
     if(document.getElementById("caixaCidade").value != '' && document.getElementById("caixaCidade2").value != '')
     {
+      $(".loader").show(); 
       $.ajax({
         type:'POST',
         url:'/?tipo=graph' +'&nocidade1='+ document.getElementById("caixaCidade").value +
@@ -229,9 +230,13 @@ var callExecuter=function(nocidade, sg_uf, ano){
         }
       });
     }
+    else
+    {
+      alert("Preencha todos os campos!");
+    }
   }
   function desenhaGrafico(){ 
-    console.log("entrei na desenha.");  
+    console.log("entrei na desenha."); 
        // Load the Visualization API and the corechart package.
         google.charts.load('current', {'packages':['corechart']});
         // Set a callback to run when the Google Visualization API is loaded.
@@ -266,5 +271,6 @@ var callExecuter=function(nocidade, sg_uf, ano){
           // Instantiate and draw our chart, passing in some options.
           var chart = new google.visualization.AreaChart(document.getElementById('chart_div'));
           chart.draw(data, options);
+          $('.loader').fadeOut("slow");
         }
       }
