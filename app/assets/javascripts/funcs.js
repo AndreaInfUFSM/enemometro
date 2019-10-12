@@ -269,7 +269,7 @@ var callExecuter=function(nocidade, sg_uf, ano){
                         };
   
           // Instantiate and draw our chart, passing in some options.
-          var chart = new google.visualization.AreaChart(document.getElementById('chart_div'));
+          var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
           chart.draw(data, options);
           $('.loader').fadeOut("slow");
         }
