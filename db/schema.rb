@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_22_060055) do
+ActiveRecord::Schema.define(version: 2019_09_22_060057) do
 
   create_table "med2013_cidades", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "CO_MUNICIPIO_ESC"
@@ -84,8 +84,8 @@ ActiveRecord::Schema.define(version: 2019_09_22_060055) do
     t.string "SG_UF_ESC"
     t.float "MED"
     t.integer "rank"
-    t.datetime "created_at", default: "2019-09-04 00:00:00", null: false
-    t.datetime "updated_at", default: "2019-09-04 00:00:00", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "med2016_escolas", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -94,9 +94,10 @@ ActiveRecord::Schema.define(version: 2019_09_22_060055) do
     t.string "NO_MUNICIPIO_ESC"
     t.string "SG_UF_ESC"
     t.float "MED"
+    t.integer "rank"
     t.string "NO_ESCOLA"
-    t.datetime "created_at", default: "2019-09-04 00:00:00", null: false
-    t.datetime "updated_at", default: "2019-09-04 00:00:00", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "med2017_cidades", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -105,8 +106,8 @@ ActiveRecord::Schema.define(version: 2019_09_22_060055) do
     t.string "SG_UF_ESC"
     t.float "MED"
     t.integer "rank"
-    t.datetime "created_at", default: "2019-09-04 00:00:00", null: false
-    t.datetime "updated_at", default: "2019-09-04 00:00:00", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "med2017_escolas", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -115,9 +116,10 @@ ActiveRecord::Schema.define(version: 2019_09_22_060055) do
     t.string "NO_MUNICIPIO_ESC"
     t.string "SG_UF_ESC"
     t.float "MED"
+    t.integer "rank"
     t.string "NO_ESCOLA"
-    t.datetime "created_at", default: "2019-09-04 00:00:00", null: false
-    t.datetime "updated_at", default: "2019-09-04 00:00:00", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "med2018_cidades", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
