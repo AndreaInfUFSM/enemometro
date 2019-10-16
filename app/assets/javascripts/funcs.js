@@ -1,4 +1,4 @@
-var res = [], arr = [], arr2 = [];
+var res = [], arr = [], arr2 = [], arrEsc = [], arrEsc2 = [];
 
 $(document).ready(function(){
   $("#chart_div").on('DOMSubtreeModified',function(){
@@ -6,6 +6,18 @@ $(document).ready(function(){
     elm.scrollIntoView({behavior: "smooth"});
   });
 
+  $(document).keypress(function(e){
+    if (e.which == 13){
+        if(document.getElementById("selectComparacao").value == 'cdXcd')
+        {
+          clickGrafico('cdXcd');
+        }
+        else if(document.getElementById("selectComparacao").value == 'cdXEsc')
+        {
+          clickGrafico('cdXEsc');
+        }
+    }
+  });
   $("#selectComparacao").change(function(){
       if(document.getElementById("selectComparacao").value == "cdXcd")
       {
@@ -85,20 +97,106 @@ $(document).ready(function(){
 										<input class="form-control" style="color:black; background-color: rgba(255,255,255,0.8);" id = "caixaCidade2" required type="text" placeholder="Qual a sua cidade?">
 										</div>
 										</div>
-									</div>
+                  </div>
+                  <button type="button" id="botaozinCidade" class="btn btn-dark" style="margin-top: 5%;" onclick="clickGrafico('cdXcd');">Buscar</button>
          `;
-         fetchBanco();
+         fetchBancoCidade();
+      }
+      else if(document.getElementById("selectComparacao").value == "cdXEsc")
+      {
+        var span = '';
+        span = document.getElementById("inputs");
+        span.innerHTML = `
+        <div class="card-group">
+                   <div class="card bg-dark text-white">
+                       <div class="card-body"   style="background-color:rgba(55,64,53,0.7);">
+                         <h5 class="card-title">Selecione a escola</h5>
+                         <select class="custom-select custom-select-lg mb-3" id="selectEstado" style="color:black; background-color: rgba(255,255,255,0.8);">
+                       <option>Selecione</option>
+                       <option>AC</option>
+                       <option>AL</option>
+                       <option>AM</option>
+                       <option>AP</option>
+                       <option>BA</option>
+                       <option>CE</option>
+                       <option>DF</option>
+                       <option>ES</option>
+                       <option>GO</option>
+                       <option>MA</option>
+                       <option>MG</option>
+                       <option>MS</option>
+                       <option>MT</option>
+                       <option>PA</option>
+                       <option>PB</option>
+                       <option>PE</option>
+                       <option>PI</option>
+                       <option>PR</option>
+                       <option>RJ</option>
+                       <option>RN</option>
+                       <option>RO</option>
+                       <option>RR</option>
+                       <option>RS</option>
+                       <option>SC</option>
+                       <option>SP</option>
+                       <option>SE</option>
+                       <option>TO</option>
+                     </select><br>
+                     <input class="form-control" style="color:black; background-color: rgba(255,255,255,0.8);" id = "caixaCidade" type="text" required placeholder="Qual a sua cidade?">
+                     <br><input class="form-control" style="color:black; background-color: rgba(255,255,255,0.8);" id = "caixaEscola" required type="text" placeholder="Qual a sua escola?">
+                   </div>
+                   </div>
+                   <div class="card bg-dark text-white">
+                     <div class="card-body"   style="background-color:rgba(55,64,53,0.7);">
+                       <h5 class="card-title">Selecione a cidade</h5>
+                       <select class="custom-select custom-select-lg mb-3" id="selectEstado2" style="color:black; background-color: rgba(255,255,255,0.8);">
+                         <option>Selecione</option>
+                         <option>AC</option>
+                         <option>AL</option>
+                         <option>AM</option>
+                         <option>AP</option>
+                         <option>BA</option>
+                         <option>CE</option>
+                         <option>DF</option>
+                         <option>ES</option>
+                         <option>GO</option>
+                         <option>MA</option>
+                         <option>MG</option>
+                         <option>MS</option>
+                         <option>MT</option>
+                         <option>PA</option>
+                         <option>PB</option>
+                         <option>PE</option>
+                         <option>PI</option>
+                         <option>PR</option>
+                         <option>RJ</option>
+                         <option>RN</option>
+                         <option>RO</option>
+                         <option>RR</option>
+                         <option>RS</option>
+                         <option>SC</option>
+                         <option>SP</option>
+                         <option>SE</option>
+                         <option>TO</option>
+                       </select><br>
+                   <input class="form-control" style="color:black; background-color: rgba(255,255,255,0.8);" id = "caixaCidade2" required type="text" placeholder="Qual a sua cidade?">
+                   </div>
+                   </div>
+                 </div>
+                 <button type="button" id="botaozinCidadeEscola" class="btn btn-dark" style="margin-top: 5%;" onclick="clickGrafico('cdXEsc');">Buscar</button>
+        `;
+        fetchBancoCidade();
+        fetchBancoEscola();
       }
     });
 });
 
-function fetchBanco()
+function fetchBancoCidade()
 {
   $("#selectEstado").change(function(){
-    carregaBanco(document.getElementById("selectEstado").value, 1);
+    carregaCidadesBanco(document.getElementById("selectEstado").value, 1);
   });
   $("#selectEstado2").change(function(){
-    carregaBanco(document.getElementById("selectEstado2").value, 2);
+    carregaCidadesBanco(document.getElementById("selectEstado2").value, 2);
   });
   $(function(){
     $('#caixaCidade2').autocomplete({
@@ -122,14 +220,52 @@ function fetchBanco()
   });
 }
 
+function fetchBancoEscola()
+{
+   $("#caixaCidade").bind('input', function(){
+    if($(this).val().length > 2)
+    {
+      carregaEscolasBanco(document.getElementById("selectEstado").value, 
+                          document.getElementById("caixaCidade").value, 1);
+    }
+   });
+   $("#caixaCidade2").bind('input', function(){
+    if($(this).val().length > 2)
+    {
+      carregaEscolasBanco(document.getElementById("selectEstado2").value, 
+                          document.getElementById("caixaCidade2").value, 2);
+    }
+   });
+  $(function(){
+    $('#caixaEscola2').autocomplete({
+        source: function(request, response) {
+          var results = $.ui.autocomplete.filter(arrEsc2, request.term);
+          response(results.slice(0, 12));
+      },        
+        delay:  50,
+        minLength: 1,
+    });
+  });
+  $(function(){
+    $('#caixaEscola').autocomplete({
+        source: function(request, response) {
+          var results = $.ui.autocomplete.filter(arrEsc, request.term);
+          response(results.slice(0, 12));
+      },        
+        delay:  50,
+        minLength: 1,
+    });
+  });
+}
+
 // fetch do DB retornando as cidades em JSON
 // opc = 1: Coluna da primeira cidade
 // opc = 2: Coluna da segunda cidade
-function carregaBanco(val, opc)
+function carregaCidadesBanco(val, opc)
 {
   $.ajax({
     type: 'GET',
-    url: '/'+'?inic=TRUE&SG_UF_ESC=' + val,
+    url: '/'+'?cid=TRUE&SG_UF_ESC=' + val,
     success: function(data){
       res = data;
       if(opc == 1)
@@ -146,6 +282,34 @@ function carregaBanco(val, opc)
         for(var i = 0; i < res.length; i++)
         {
           arr2.push(res[i]);
+        }
+      }
+    }
+  });
+}
+
+function carregaEscolasBanco(val, city, opc)
+{
+  console.log('carregado');
+  $.ajax({
+    type: 'GET',
+    url: '/'+'?esc=TRUE&SG_UF_ESC=' + val + '&NO_MUNICIPIO_ESC=' + city,
+    success: function(data){
+      res = data;
+      if(opc == 1)
+      {
+        arrEsc = [];
+        for(var i = 0; i < res.length; i++)
+        {
+          arrEsc.push(res[i]);
+        }
+      }
+      else if (opc == 2)
+      {
+        arrEsc2 = [];
+        for(var i = 0; i < res.length; i++)
+        {
+          arrEsc2.push(res[i]);
         }
       }
     }
@@ -211,22 +375,25 @@ var callExecuter=function(nocidade, sg_uf, ano){
       }
     });
   }
+
   var json = [];
-  function clickGrafico()
+function clickGrafico(tipoGraph)
+{
+  if(tipoGraph == 'cdXcd')
   {
     if(document.getElementById("caixaCidade").value != '' && document.getElementById("caixaCidade2").value != '')
     {
       $(".loader").show(); 
       $.ajax({
         type:'POST',
-        url:'/?tipo=graph' +'&nocidade1='+ document.getElementById("caixaCidade").value +
+        url:'/?tipo=graphCidade' +'&nocidade1='+ document.getElementById("caixaCidade").value +
                 '&SG_UF_ESC1=' + document.getElementById("selectEstado").value +
                 '&nocidade2=' + document.getElementById("caixaCidade2").value +
                 '&SG_UF_ESC2=' + document.getElementById("selectEstado2").value,
         success:function(jason){
         console.log(JSON.stringify(jason));
         json = jason;
-        desenhaGrafico();
+        desenhaGrafico('cdXcd');
         }
       });
     }
@@ -235,42 +402,108 @@ var callExecuter=function(nocidade, sg_uf, ano){
       alert("Preencha todos os campos!");
     }
   }
-  function desenhaGrafico(){ 
-    console.log("entrei na desenha."); 
-       // Load the Visualization API and the corechart package.
-        google.charts.load('current', {'packages':['corechart']});
-        // Set a callback to run when the Google Visualization API is loaded.
-        google.charts.setOnLoadCallback(drawChart);
-
-        // Callback that creates and populates a data table,
-        // instantiates the pie chart, passes in the data and
-        // draws it.
-        function drawChart() {
-          console.log("cheguei no draw.");
-          // Create the data table.
-          var data = new google.visualization.DataTable();
-          data.addColumn('string', 'Ano');
-          data.addColumn('number', document.getElementById("caixaCidade").value);
-          data.addColumn('number', document.getElementById("caixaCidade2").value);
-          data.addRows(json);
-  
-          // Set chart options
-          var options = {'title':'Média das cidades por ano',
-                         'width':1400,
-                         'height':600,
-                         'pointSize': 4,
-                         'lineWidth': 2,
-                         'legend': 'bottom',
-                         'backgroundColor': {
-                          'fill': '#FFFFFF',
-                          'opacity': 30
-                          },
-                         'is3D': true
-                        };
-  
-          // Instantiate and draw our chart, passing in some options.
-          var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
-          chart.draw(data, options);
-          $('.loader').fadeOut("slow");
+  else if(tipoGraph == 'cdXEsc')
+  {
+    $(".loader").show(); 
+      $.ajax({
+        type:'POST',
+        url:'/?tipo=graphEscolaCidade' +'&nocidade1='+ document.getElementById("caixaCidade").value +
+                '&SG_UF_ESC1=' + document.getElementById("selectEstado").value +
+                '&nocidade2=' + document.getElementById("caixaCidade2").value +
+                '&SG_UF_ESC2=' + document.getElementById("selectEstado2").value +
+                '&NO_ESCOLA=' + document.getElementById("caixaEscola").value,
+        success:function(jason){
+        console.log(JSON.stringify(jason));
+        json = jason;
+        desenhaGrafico('cdXEsc');
         }
-      }
+      });
+    }
+    else
+    {
+      alert("Preencha todos os campos!");
+    }
+  }
+
+function desenhaGrafico(tipoGraph){
+  if(tipoGraph == 'cdXcd')
+  {
+    console.log("entrei na desenha."); 
+    // Load the Visualization API and the corechart package.
+      google.charts.load('current', {'packages':['corechart']});
+      // Set a callback to run when the Google Visualization API is loaded.
+      google.charts.setOnLoadCallback(drawChart);
+
+      // Callback that creates and populates a data table,
+      // instantiates the pie chart, passes in the data and
+      // draws it.
+    function drawChart() {
+      console.log("cheguei no draw.");
+      // Create the data table.
+      var data = new google.visualization.DataTable();
+      data.addColumn('string', 'Ano');
+      data.addColumn('number', document.getElementById("caixaCidade").value);
+      data.addColumn('number', document.getElementById("caixaCidade2").value);
+      data.addRows(json);
+
+      // Set chart options
+      var options = {'title':'Média das cidades por ano',
+                      'width':1400,
+                      'height':600,
+                      'pointSize': 4,
+                      'lineWidth': 2,
+                      'legend': 'bottom',
+                      'backgroundColor': {
+                      'fill': '#FFFFFF',
+                      'opacity': 30
+                      },
+                      'is3D': true
+                    };
+
+      // Instantiate and draw our chart, passing in some options.
+      var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
+      chart.draw(data, options);
+      $('.loader').fadeOut("slow");
+    }
+  } 
+  else if(tipoGraph == 'cdXEsc')
+  {
+    console.log("entrei na desenha cdXEsc."); 
+    // Load the Visualization API and the corechart package.
+      google.charts.load('current', {'packages':['corechart']});
+      // Set a callback to run when the Google Visualization API is loaded.
+      google.charts.setOnLoadCallback(drawChart);
+
+      // Callback that creates and populates a data table,
+      // instantiates the pie chart, passes in the data and
+      // draws it.
+    function drawChart() {
+      console.log("cheguei no draw.");
+      // Create the data table.
+      var data = new google.visualization.DataTable();
+      data.addColumn('string', 'Ano');
+      data.addColumn('number', document.getElementById("caixaCidade2").value);
+      data.addColumn('number', document.getElementById("caixaEscola").value);
+      data.addRows(json);
+
+      // Set chart options
+      var options = {'title':'Média da cidade vs escola',
+                      'width':1400,
+                      'height':600,
+                      'pointSize': 4,
+                      'lineWidth': 2,
+                      'legend': 'bottom',
+                      'backgroundColor': {
+                      'fill': '#FFFFFF',
+                      'opacity': 30
+                      },
+                      'is3D': true
+                    };
+
+      // Instantiate and draw our chart, passing in some options.
+      var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
+      chart.draw(data, options);
+      $('.loader').fadeOut("slow");
+    }
+  }
+}
