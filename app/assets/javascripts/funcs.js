@@ -16,9 +16,17 @@ $(document).ready(function(){
         {
           clickGrafico('cdXEsc');
         }
+        else if(document.getElementById("selectComparacao").value == 'EscXEsc')
+        {
+          clickGrafico('EscXEsc');
+        }
     }
   });
   $("#selectComparacao").change(function(){
+      var x = document.getElementById("selectComparacao");
+      if(x.options[0].value == 'sel'){
+        x.remove(0);
+      }
       if(document.getElementById("selectComparacao").value == "cdXcd")
       {
          var span = '';
@@ -187,6 +195,92 @@ $(document).ready(function(){
         fetchBancoCidade();
         fetchBancoEscola();
       }
+      else if(document.getElementById("selectComparacao").value == "EscXEsc")
+      {
+        var span = '';
+        span = document.getElementById("inputs");
+        span.innerHTML = `
+        <div class="card-group">
+                   <div class="card bg-dark text-white">
+                       <div class="card-body"   style="background-color:rgba(55,64,53,0.7);">
+                         <h5 class="card-title">Selecione a primeira escola</h5>
+                         <select class="custom-select custom-select-lg mb-3" id="selectEstado" style="color:black; background-color: rgba(255,255,255,0.8);">
+                       <option>Selecione</option>
+                       <option>AC</option>
+                       <option>AL</option>
+                       <option>AM</option>
+                       <option>AP</option>
+                       <option>BA</option>
+                       <option>CE</option>
+                       <option>DF</option>
+                       <option>ES</option>
+                       <option>GO</option>
+                       <option>MA</option>
+                       <option>MG</option>
+                       <option>MS</option>
+                       <option>MT</option>
+                       <option>PA</option>
+                       <option>PB</option>
+                       <option>PE</option>
+                       <option>PI</option>
+                       <option>PR</option>
+                       <option>RJ</option>
+                       <option>RN</option>
+                       <option>RO</option>
+                       <option>RR</option>
+                       <option>RS</option>
+                       <option>SC</option>
+                       <option>SP</option>
+                       <option>SE</option>
+                       <option>TO</option>
+                     </select><br>
+                     <input class="form-control" style="color:black; background-color: rgba(255,255,255,0.8);" id = "caixaCidade" type="text" required placeholder="Qual a sua cidade?">
+                     <br><input class="form-control" style="color:black; background-color: rgba(255,255,255,0.8);" id = "caixaEscola" required type="text" placeholder="Qual a sua escola?">
+                   </div>
+                   </div>
+                   <div class="card bg-dark text-white">
+                     <div class="card-body"   style="background-color:rgba(55,64,53,0.7);">
+                       <h5 class="card-title">Selecione a segunda escola</h5>
+                       <select class="custom-select custom-select-lg mb-3" id="selectEstado2" style="color:black; background-color: rgba(255,255,255,0.8);">
+                         <option>Selecione</option>
+                         <option>AC</option>
+                         <option>AL</option>
+                         <option>AM</option>
+                         <option>AP</option>
+                         <option>BA</option>
+                         <option>CE</option>
+                         <option>DF</option>
+                         <option>ES</option>
+                         <option>GO</option>
+                         <option>MA</option>
+                         <option>MG</option>
+                         <option>MS</option>
+                         <option>MT</option>
+                         <option>PA</option>
+                         <option>PB</option>
+                         <option>PE</option>
+                         <option>PI</option>
+                         <option>PR</option>
+                         <option>RJ</option>
+                         <option>RN</option>
+                         <option>RO</option>
+                         <option>RR</option>
+                         <option>RS</option>
+                         <option>SC</option>
+                         <option>SP</option>
+                         <option>SE</option>
+                         <option>TO</option>
+                       </select><br>
+                   <input class="form-control" style="color:black; background-color: rgba(255,255,255,0.8);" id = "caixaCidade2" required type="text" placeholder="Qual a sua cidade?">
+                   <br><input class="form-control" style="color:black; background-color: rgba(255,255,255,0.8);" id = "caixaEscola2" required type="text" placeholder="Qual a sua escola?">
+                   </div>
+                   </div>
+                 </div>
+                 <button type="button" id="botaozinCidadeEscola" class="btn btn-dark" style="margin-top: 5%;" onclick="clickGrafico('EscXEsc');">Buscar</button>
+        `;
+        fetchBancoCidade();
+        fetchBancoEscola();
+      }
     });
 });
 
@@ -222,15 +316,29 @@ function fetchBancoCidade()
 
 function fetchBancoEscola()
 {
-   $("#caixaCidade").bind('input', function(){
-    if($(this).val().length > 2)
+   $("#caixaEscola").click(function(){
+    if($("#caixaCidade").val().length > 1)
     {
       carregaEscolasBanco(document.getElementById("selectEstado").value, 
                           document.getElementById("caixaCidade").value, 1);
     }
    });
-   $("#caixaCidade2").bind('input', function(){
-    if($(this).val().length > 2)
+   $("#caixaEscola2").click(function(){
+    if($("#caixaCidade2").val().length > 1)
+    {
+      carregaEscolasBanco(document.getElementById("selectEstado2").value, 
+                          document.getElementById("caixaCidade2").value, 2);
+    }
+   });
+   $("#caixaEscola").focus(function(){
+    if($("#caixaCidade").val().length > 1)
+    {
+      carregaEscolasBanco(document.getElementById("selectEstado").value, 
+                          document.getElementById("caixaCidade").value, 1);
+    }
+   });
+   $("#caixaEscola2").focus(function(){
+    if($("#caixaCidade2").val().length > 1)
     {
       carregaEscolasBanco(document.getElementById("selectEstado2").value, 
                           document.getElementById("caixaCidade2").value, 2);
@@ -404,6 +512,10 @@ function clickGrafico(tipoGraph)
   }
   else if(tipoGraph == 'cdXEsc')
   {
+    if(document.getElementById("caixaCidade").value != '' 
+    && document.getElementById("caixaCidade2").value != ''
+    && document.getElementById("caixaEscola").value != '')
+    {
     $(".loader").show(); 
       $.ajax({
         type:'POST',
@@ -424,6 +536,35 @@ function clickGrafico(tipoGraph)
       alert("Preencha todos os campos!");
     }
   }
+  else if(tipoGraph == 'EscXEsc')
+  {
+    if(document.getElementById("caixaCidade").value != '' 
+    && document.getElementById("caixaCidade2").value != ''
+    && document.getElementById("caixaEscola").value != ''
+    && document.getElementById("caixaEscola2").value != '')
+    {
+    $(".loader").show(); 
+      $.ajax({
+        type:'POST',
+        url:'/?tipo=graphEscolaEscola' +'&nocidade1='+ document.getElementById("caixaCidade").value +
+                '&SG_UF_ESC1=' + document.getElementById("selectEstado").value +
+                '&nocidade2=' + document.getElementById("caixaCidade2").value +
+                '&SG_UF_ESC2=' + document.getElementById("selectEstado2").value +
+                '&NO_ESCOLA1=' + document.getElementById("caixaEscola").value +
+                '&NO_ESCOLA2=' + document.getElementById("caixaEscola2").value,
+        success:function(jason){
+        console.log(JSON.stringify(jason));
+        json = jason;
+        desenhaGrafico('EscXEsc');
+        }
+      });
+    }
+    else
+    {
+      alert("Preencha todos os campos!");
+    }
+  }
+}
 
 function desenhaGrafico(tipoGraph){
   if(tipoGraph == 'cdXcd')
@@ -448,7 +589,7 @@ function desenhaGrafico(tipoGraph){
 
       // Set chart options
       var options = {'title':'Média das cidades por ano',
-                      'width':1400,
+                      'width':1200,
                       'height':600,
                       'pointSize': 4,
                       'lineWidth': 2,
@@ -488,7 +629,47 @@ function desenhaGrafico(tipoGraph){
 
       // Set chart options
       var options = {'title':'Média da cidade vs escola',
-                      'width':1400,
+                      'width':1200,
+                      'height':600,
+                      'pointSize': 4,
+                      'lineWidth': 2,
+                      'legend': 'bottom',
+                      'backgroundColor': {
+                      'fill': '#FFFFFF',
+                      'opacity': 30
+                      },
+                      'is3D': true
+                    };
+
+      // Instantiate and draw our chart, passing in some options.
+      var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
+      chart.draw(data, options);
+      $('.loader').fadeOut("slow");
+    }
+  }
+  else if(tipoGraph == 'EscXEsc')
+  {
+    console.log("entrei na desenha EscXEsc."); 
+    // Load the Visualization API and the corechart package.
+      google.charts.load('current', {'packages':['corechart']});
+      // Set a callback to run when the Google Visualization API is loaded.
+      google.charts.setOnLoadCallback(drawChart);
+
+      // Callback that creates and populates a data table,
+      // instantiates the pie chart, passes in the data and
+      // draws it.
+    function drawChart() {
+      console.log("cheguei no draw.");
+      // Create the data table.
+      var data = new google.visualization.DataTable();
+      data.addColumn('string', 'Ano');
+      data.addColumn('number', document.getElementById("caixaEscola").value);
+      data.addColumn('number', document.getElementById("caixaEscola2").value);
+      data.addRows(json);
+
+      // Set chart options
+      var options = {'title':'Média das Escolas',
+                      'width':1200,
                       'height':600,
                       'pointSize': 4,
                       'lineWidth': 2,

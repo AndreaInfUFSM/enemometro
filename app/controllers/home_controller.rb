@@ -3,10 +3,10 @@ class HomeController < ApplicationController
     
     def index
         if params[:cid]
-            @listacidades = Med2015Cidade.where('SG_UF_ESC = ?',params[:SG_UF_ESC]).order(:NO_MUNICIPIO_ESC).pluck(:NO_MUNICIPIO_ESC)
+            @listacidades = Med2015Cidade.where("SG_UF_ESC = ?",params[:SG_UF_ESC]).order(:NO_MUNICIPIO_ESC).pluck(:NO_MUNICIPIO_ESC)
             render json: @listacidades
         elsif params[:esc]
-            @listaescolas = Med2015Escola.where('SG_UF_ESC = ? AND NO_MUNICIPIO_ESC LIKE ?',params[:SG_UF_ESC], params[:NO_MUNICIPIO_ESC]).order(:NO_ESCOLA).pluck(:NO_ESCOLA)
+            @listaescolas = Med2015Escola.where("SG_UF_ESC = ? AND NO_MUNICIPIO_ESC LIKE ?",params[:SG_UF_ESC], params[:NO_MUNICIPIO_ESC]).order(:NO_ESCOLA).pluck(:NO_ESCOLA)
             render json: @listaescolas
         end    
     end
@@ -52,6 +52,18 @@ class HomeController < ApplicationController
                     vetor.push([i.to_s, @sql[0][0], @sql2[0][0]])
                 else
                     render js: "alert('Cidade não encontrada, verifique o nome das cidades informadas!')" and return
+                end
+            end
+            render json: vetor
+        elsif params[:tipo].to_s == 'graphEscolaEscola'
+            vetor = []
+            for i in 2013..2018
+                @sql = ActiveRecord::Base.connection.exec_query("SELECT MED FROM med"+i.to_s+"_escolas WHERE NO_ESCOLA LIKE " + "'" + params[:NO_ESCOLA1] +  "'" + " AND SG_UF_ESC = " + "'" + params[:SG_UF_ESC1] + "'"+ " AND NO_MUNICIPIO_ESC LIKE " + "'" + params[:nocidade1] + "'" + " ").rows
+                @sql2 = ActiveRecord::Base.connection.exec_query("SELECT MED FROM med"+i.to_s+"_escolas WHERE NO_ESCOLA LIKE " + "'" + params[:NO_ESCOLA2] + "'" + " AND NO_MUNICIPIO_ESC LIKE " + "'" + params[:nocidade2] +  "'" + " AND SG_UF_ESC = " + "'" + params[:SG_UF_ESC2] + "'" + " ").rows
+                if @sql.count > 0 && @sql2.count > 0
+                    vetor.push([i.to_s, @sql[0][0], @sql2[0][0]])
+                else
+                    render js: "alert('Erro na busca, verifique o nome das cidades e escolas!')" and return
                 end
             end
             render json: vetor

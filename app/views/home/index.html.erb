@@ -32,9 +32,7 @@
 					</div>
 					<div class="col-xs-10 text-right menu-1">
 						<ul>
-							<li class="active"><a href="#">Inicio</a></li>
-							<li><a href="#selectEstado">Compare</a></li>
-							<li><a href="#fh5co-counter" data-toggle="modal" data-target="#modalMedias">Dados Educionais</a></li>
+							<li><a href="#fh5co-counter" data-toggle="modal" data-target="#modalMedias">Informações sobre o projeto</a></li>
 						  <li><a href="#fh5co-testimonial">Sobre</a></li>
 							<li><a href="#">Contato</a></li>
 						</ul>
@@ -48,14 +46,15 @@
 		<div class="modal fade" id="modalMedias" tabindex="-1" role="dialog" aria-labelledby="TituloModal" aria-hidden="true">
 			<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
 				<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="TituloModal">Cálculo das médias</h5>
-					<button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
-					<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
+
 				<div class="modal-body">
-					...
+				<h3>Histórico das médias</h3><hr>
+				<p>O INEP disponibilizou a média por escolas durante os anos de 2005 até 2015, após isso o instituto parou de fornecer as médias calculadas.</p>
+				<p>A fórmula de cálculo de médias do INEP realizava a soma de todas as notas por aluno, incluindo casos onde o aluno não possuía nota por desistência ou semelhantes.</p>
+				<p>Para calcular a média de cada escola, realizamos uma média aritmética com as notas das cinco áreas de conhecimento (Ciências Humanas, Ciências da Natureza, Linguagens, Matemática e Redação) por aluno. Somente foram computadas as médias de alunos que não possuiam notas faltantes (não necessáriamente zero).</p>
+				<h3>Fontes de dados</h3><hr>
+				<p>Você pode acessar os arquivos contendo os dados brutos de cada edição do ENEM no portal do <a href="http://portal.inep.gov.br/microdados" target="_blank">INEP</a></p>
+				<p><b>Atenção!</b> os microdados do ENEM possuem um tamanho relativamente grande (aprox. 2~3GB cada). Abrir o arquivo bruto em seu computador pode acarretar no travamento do mesmo.</p>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
@@ -77,10 +76,10 @@
 				   					<h2 style="margin-left: 25%; margin-right: 25%;">Comparando médias do ENEM</h2>
 									<div class="card-body"   style="background-color:rgba(55,64,53,0.7);">
 										<select class="custom-select custom-select-lg mb-3" id="selectComparacao" style="color:black; background-color: rgba(255,255,255,0.8);">
-											<option value="">Selecione o tipo de comparação...</option>
+											<option value="sel">Selecione o tipo de comparação...</option>
 											<option value="cdXcd" >Cidade com Cidade</option>
 											<option value="cdXEsc" >Cidade com Escola</option>
-											<option value="EscXEsc" disabled>Escola com Escola</option>
+											<option value="EscXEsc" >Escola com Escola</option>
 										</select>												
 									</div>
 									<span id="inputs"></span>
@@ -94,7 +93,9 @@
 				   </li>
 	</aside>
 	
-	<div id="chart_div" style="background-image: url(/assets/img_bg_4.jpg);"></div>
+	<div class="d-flex justify-content-around">
+		<div id="chart_div"></div>
+	</div>
 <!--
 	<div id="fh5co-course-categories">
 		<div class="container">
@@ -290,15 +291,6 @@
 				<div class="col-md-10 col-md-offset-1">
 					<div class="row animate-box">
 						<div class="owl-carousel owl-carousel-fullwidth">
-								<div class="item">
-									<div class="testimony-slide active text-center">
-										<div class="user" style="background-image: url(/assets/calc.png);"></div>
-										<span>O Projeto<br><small>Cálculo das médias</small></span>
-										<blockquote>
-											<p>Para calcular a média de cada escola, realizamos uma média aritmética com as notas das cinco áreas de conhecimento (Ciências Humanas, Ciências da Natureza, Linguagens, Matemática e Redação) por aluno. Somente foram computadas as médias de alunos que não possuiam notas faltantes (não necessáriamente zero)</p>
-										</blockquote>
-									</div>
-								</div>
 							<div class="item">
 								<div class="testimony-slide active text-center">
 									<div class="user" style="background-image: url(/assets/person1.jpg);"></div>
