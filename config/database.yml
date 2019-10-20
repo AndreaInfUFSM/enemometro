@@ -13,11 +13,9 @@ default: &default
   adapter: mysql2
   encoding: utf8
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  username: <%= ENV['DB_USERNAME'] %>
-  password: <%= ENV['DB_PASSWORD'] %>
+  username: root
+  password:
   socket: /var/run/mysqld/mysqld.sock
-  port: <%= ENV['DB_PORT'] %>
-  host: <%= ENV['DB_HOST'] %>
 
 development:
   <<: *default
@@ -50,7 +48,10 @@ test:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
 production:
-  <<: *default
+  adapter: mysql2
+  pool: 5
+  timeout: 5000
   database: Enemometro_production
-
-
+  username: root
+  password: pratesvacilao
+  socket: "/cloudsql/enemometro-251121:southamerica-east1:enemometrodb"
