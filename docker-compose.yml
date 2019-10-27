@@ -4,6 +4,7 @@ volumes:
     driver: local
 services:
  db:
+   container_name: enemometro_db
    image: "mysql:5.7"
    environment:
      MYSQL_ROOT_PASSWORD: root
@@ -15,6 +16,7 @@ services:
      - internal
      - traefik
  web:
+   container_name: enemometro_web
    depends_on:
       - "db"
    image: "enemometro:latest"
@@ -31,9 +33,9 @@ services:
     DB_HOST: db
    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
    ports:
-      - "3000:80"
+      - "3000:3000"
    networks:
-     - default
+     - internal
      - traefik
 networks:
   traefik:
