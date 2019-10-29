@@ -10,5 +10,4 @@ WORKDIR /enemometro
 RUN git clone https://github.com/wdsoares/enemometro.git .
 RUN bundle install
 
-EXPOSE 3000
 CMD ["rails", "server", "-b", "0.0.0.0", "-p", "3000"]
