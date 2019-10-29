@@ -671,12 +671,15 @@ function desenhaGrafico(tipoGraph){
       var options = {'title':'Média das Escolas',
                       'width':1200,
                       'height':600,
+                      'vAxis': {
+                        'minValue': 100
+                      },
                       'pointSize': 4,
                       'lineWidth': 2,
                       'legend': 'bottom',
                       'backgroundColor': {
-                      'fill': '#FFFFFF',
-                      'opacity': 30
+                        'fill': '#FFFFFF',
+                        'opacity': 30
                       },
                       'is3D': true
                     };

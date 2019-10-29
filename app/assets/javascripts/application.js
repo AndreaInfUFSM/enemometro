@@ -11,17 +11,17 @@
 // about supported directives.
 //= require rails-ujs
 //= require modernizr-2.6.2.min
-//= require principal
 //= require google_map
 //= require jquery.min
 //= require jquery-ui.min
 //= require jquery.easing.1.3
 //= require jquery.waypoints.min
 //= require jquery.stellar.min
-//= require owl.carousel.min
 //= require jquery.flexslider-min
 //= require jquery.countTo
 //= require jquery.magnific-popup.min
+//= require owl.carousel.min
+//= require principal
 //= require funcs
 //= require bootstrap.min
 //= require magnific-popup-options
