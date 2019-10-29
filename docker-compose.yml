@@ -1,7 +1,4 @@
 version: "2"
-volumes:
-  enemometro:
-    driver: local
 services:
  db:
    container_name: enemometro_db
