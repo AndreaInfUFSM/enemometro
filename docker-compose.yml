@@ -16,6 +16,7 @@ services:
       - "db"
    image: "enemometro:latest"
    labels:
+      - "traefik.http.routers.web.entrypoints=web"
       - "traefik.http.routers.web.rule=Host(`enemometro.inf.ufsm.br`)"
    environment:
     DB_USERNAME: root
