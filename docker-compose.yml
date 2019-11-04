@@ -16,7 +16,7 @@ services:
       - "db"
    image: "enemometro:latest"
    labels:
-      - traefik.http.routers.web.rule 	Host(`enemometro.inf.ufsm.br`)
+      - "traefik.http.routers.nginx.rule=Host(`educadex.inf.ufsm.br`)"
    environment:
     DB_USERNAME: root
     DB_PASSWORD: root
