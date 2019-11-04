@@ -16,10 +16,7 @@ services:
       - "db"
    image: "enemometro:latest"
    labels:
-      - traefik.backend=web
-      - traefik.frontend.rule=Host:enemometro.inf.ufsm.br
-      - traefik.docker.network=traefik
-      - traefik.port=80
+      - traefik.http.routers.web.rule 	Host(`enemometro.inf.ufsm.br`)
    environment:
     DB_USERNAME: root
     DB_PASSWORD: root
