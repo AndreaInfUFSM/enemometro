@@ -16,7 +16,7 @@ services:
       - "db"
    image: "enemometro:latest"
    labels:
-      - "traefix.enable=true"
+      - "traefik.enable=true"
       - "traefik.http.routers.web.entrypoints=web"
       - "traefik.http.routers.web.rule=Host(`enemometro.inf.ufsm.br`)"
    environment:
