@@ -17,6 +17,7 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.enemometro.rule=Host(`enemometro.inf.ufsm.br`)"
       - "traefik.http.routers.enemometro.entrypoints=web"
+      - "traefik.docker.network=traefik"
    environment:
     DB_USERNAME: root
     DB_PASSWORD: root
