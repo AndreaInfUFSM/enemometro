@@ -8,8 +8,7 @@ services:
      MYSQL_USERNAME: root
      MYSQL_PASSWORD: root
    networks:
-     - internal
-     - traefik
+     - default
  web:
    container_name: enemometro
    depends_on:
@@ -27,8 +26,8 @@ services:
     DB_HOST: db
    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
    networks:
-     - internal
      - traefik
+     - default
 networks:
   traefik:
     external:
