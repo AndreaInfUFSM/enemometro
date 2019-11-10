@@ -28,7 +28,7 @@ services:
      - traefik
      - default
    ports:
-     - "3000:80"
+     - "3000:3000"
 networks:
   traefik:
     external:
