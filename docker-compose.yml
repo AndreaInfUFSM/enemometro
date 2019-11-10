@@ -9,15 +9,14 @@ services:
      MYSQL_PASSWORD: root
    networks:
      - default
- web:
-   container_name: enemometro
+ enemometro:
    depends_on:
       - "db"
    image: "enemometro:latest"
    labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.web.rule=Host(`enemometro.inf.ufsm.br`)"
-      - "traefik.http.routers.web.entrypoints=web"
+      - "traefik.http.routers.enemometro.rule=Host(`enemometro.inf.ufsm.br`)"
+      - "traefik.http.routers.enemometro.entrypoints=web"
    environment:
     DB_USERNAME: root
     DB_PASSWORD: root
